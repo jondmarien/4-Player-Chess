@@ -149,6 +149,10 @@
     list-style: none;
   }
   
+  .nav-links li:first-child a {
+    margin-left: 30px;
+  }
+  
   .nav-links a {
     color: var(--cyber-light-gray);
     text-decoration: none;
@@ -307,12 +311,85 @@
     z-index: 1000;
     pointer-events: none;
   }
-  
-  /* Player-specific piece colors */
-  .piece-red { color: var(--player-red); text-shadow: var(--glow-red); }
-  .piece-blue { color: var(--player-blue); text-shadow: var(--glow-blue); }
-  .piece-yellow { color: var(--player-yellow); text-shadow: var(--glow-yellow); }
-  .piece-green { color: var(--player-green); text-shadow: var(--glow-green); }
+
+  /* ========================================
+    Authentic Chaturaji Board Styling
+======================================== */
+
+.chaturaji-board .chess-square {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Corner highlighting for Chaturaji */
+.chaturaji-board .chess-square[data-row="0"][data-col="0"],
+.chaturaji-board .chess-square[data-row="0"][data-col="1"],
+.chaturaji-board .chess-square[data-row="0"][data-col="2"],
+.chaturaji-board .chess-square[data-row="0"][data-col="3"],
+.chaturaji-board .chess-square[data-row="1"][data-col="0"],
+.chaturaji-board .chess-square[data-row="1"][data-col="1"],
+.chaturaji-board .chess-square[data-row="1"][data-col="2"],
+.chaturaji-board .chess-square[data-row="1"][data-col="3"] {
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+/* ========================================
+   Authentic Enochian Board Styling
+======================================== */
+
+.enochian-board .throne-square {
+    background: radial-gradient(circle, rgba(191, 64, 255, 0.6), transparent 70%);
+    border: 3px solid var(--cyber-purple) !important;
+    box-shadow: 
+        inset 0 0 15px rgba(191, 64, 255, 0.8),
+        0 0 20px rgba(191, 64, 255, 0.6);
+    position: relative;
+    z-index: 10;
+    transform: scale(1.05);
+}
+
+.enochian-board .throne-square::before {
+    content: '👑';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 1rem;
+    opacity: 0.8;
+    z-index: 15;
+    filter: drop-shadow(0 0 5px var(--cyber-purple));
+}
+
+.throne-pieces {
+    font-size: 2.2rem;
+    letter-spacing: -6px;
+    text-shadow: 0 0 20px currentColor;
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+/* Enhanced piece colors for better visibility */
+.piece-yellow { 
+    color: #ffd700; 
+    text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700, 2px 2px 4px rgba(0,0,0,0.8); 
+}
+
+.piece-blue { 
+    color: #00bfff; 
+    text-shadow: 0 0 15px #00bfff, 0 0 25px #00bfff, 2px 2px 4px rgba(0,0,0,0.8); 
+}
+
+.piece-red { 
+    color: #ff4444; 
+    text-shadow: 0 0 15px #ff4444, 0 0 25px #ff4444, 2px 2px 4px rgba(0,0,0,0.8); 
+}
+
+.piece-green { 
+    color: #32cd32; 
+    text-shadow: 0 0 15px #32cd32, 0 0 25px #32cd32, 2px 2px 4px rgba(0,0,0,0.8); 
+}
+
+.piece-black { 
+    color: #e0e0e0; 
+    text-shadow: 0 0 15px #ffffff; 
+}
   
   /* ========================================
      Player Information Panels
@@ -695,4 +772,367 @@
   .hacker-border:hover::before {
     opacity: 0.3;
   }
+  
+  /* ========================================
+   Fixed Chess Board Grid
+======================================== */
+
+.chess-board-grid {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 1px;
+    background: var(--cyber-green);
+    border: 3px solid var(--cyber-green);
+    box-shadow: var(--glow-cyber);
+}
+
+.chess-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 50px;
+    min-width: 50px;
+}
+
+.light-square {
+    background-color: #f0d9b5;
+}
+
+.dark-square {
+    background-color: #b58863;
+}
+
+/* Throne squares for Enochian chess */
+.throne-square {
+    background: radial-gradient(circle, rgba(191, 64, 255, 0.4), transparent 70%);
+    border: 2px solid var(--cyber-purple);
+    box-shadow: inset 0 0 20px rgba(191, 64, 255, 0.6);
+}
+
+.throne-pieces {
+    font-size: 1.8rem;
+    letter-spacing: -8px;
+    text-shadow: 0 0 15px currentColor;
+}
+
+/* Enhanced piece styling */
+.chess-piece {
+    font-size: 2.5rem;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s ease;
+    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.8));
+    z-index: 10;
+    font-family: 'Segoe UI Symbol', 'Noto Color Emoji', serif;
+}
+
+/* Enhanced piece colors for better visibility */
+.piece-yellow { 
+    color: #ffd700; 
+    text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700; 
+}
+
+.piece-blue { 
+    color: #00bfff; 
+    text-shadow: 0 0 15px #00bfff, 0 0 25px #00bfff; 
+}
+
+.piece-red { 
+    color: #ff4444; 
+    text-shadow: 0 0 15px #ff4444, 0 0 25px #ff4444; 
+}
+
+.piece-green { 
+    color: #32cd32; 
+    text-shadow: 0 0 15px #32cd32, 0 0 25px #32cd32; 
+}
+
+.piece-black { 
+    color: #e0e0e0; 
+    text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff, 2px 2px 4px rgba(0,0,0,0.8);
+    filter: drop-shadow(0 0 10px #ffffff);
+}
+  
+/* ========================================
+   Chaturaji Corner Quadrants
+======================================== */
+
+.chaturaji-board .corner-quadrant {
+    box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.4);
+    border: 2px solid rgba(255, 215, 0, 0.6);
+}
+
+.chaturaji-board .corner-quadrant.light-square {
+    background: linear-gradient(45deg, #f0d9b5, #ffd700);
+}
+
+.chaturaji-board .corner-quadrant.dark-square {
+    background: linear-gradient(45deg, #b58863, #daa520);
+}
+
+/* ========================================
+   Extended Enochian Board Layout
+======================================== */
+
+.enochian-board-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 5px;
+    width: max-content;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(45deg, var(--cyber-dark), var(--cyber-gray));
+    border: 3px solid var(--cyber-purple);
+    border-radius: 10px;
+    box-shadow: var(--glow-cyber);
+}
+
+.top-extensions, .bottom-extensions {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    align-items: center;
+}
+
+.main-board-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 5px;
+    align-items: center;
+}
+
+.left-extensions, .right-extensions {
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    gap: 1px;
+}
+
+.yellow-extension, .blue-extension, .red-extension, .green-extension {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+}
+
+.yellow-left-ext, .green-left-ext, .blue-right-ext, .red-right-ext {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 2px;
+}
+
+.extension-square {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(42, 42, 42, 0.8);
+    border: 1px solid var(--cyber-green);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.extension-square:hover {
+    background: rgba(0, 255, 65, 0.2);
+    box-shadow: inset 0 0 10px var(--cyber-green);
+}
+
+.central-board {
+    width: 320px;
+    height: 320px;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+}
+
+/* Elemental themed extensions */
+.element-air { border-color: var(--cyber-yellow); }
+.element-water { border-color: var(--cyber-blue); }
+.element-fire { border-color: var(--cyber-red); }
+.element-earth { border-color: var(--cyber-green); }
+
+.board-spacer {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+}
+  
+/* ========================================
+   Chaturaji Territory Control Styling
+======================================== */
+
+.chaturaji-board .yellow-territory {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), transparent 70%);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.chaturaji-board .blue-territory {
+    background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), transparent 70%);
+    border: 1px solid rgba(0, 191, 255, 0.5);
+}
+
+.chaturaji-board .red-territory {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), transparent 70%);
+    border: 1px solid rgba(255, 68, 68, 0.5);
+}
+
+.chaturaji-board .green-territory {
+    background: linear-gradient(135deg, rgba(50, 205, 50, 0.3), transparent 70%);
+    border: 1px solid rgba(50, 205, 50, 0.5);
+}
+
+/* ========================================
+   Simplified Enochian Board Styling
+======================================== */
+
+.enochian-board .throne-area {
+    background: rgba(191, 64, 255, 0.2);
+    border: 1px solid rgba(191, 64, 255, 0.4);
+}
+
+.enochian-board .chess-square {
+    z-index: 1;
+    position: relative;
+}
+
+.enochian-board .chess-square:not(.throne-square) {
+    z-index: 5;
+}
+
+/* Chaturaji territory highlighting */
+.territory-yellow { background: linear-gradient(45deg, rgba(255,215,0,0.3), transparent); }
+.territory-blue { background: linear-gradient(45deg, rgba(0,191,255,0.3), transparent); }
+.territory-red { background: linear-gradient(45deg, rgba(255,68,68,0.3), transparent); }
+.territory-green { background: linear-gradient(45deg, rgba(50,205,50,0.3), transparent); }
+
+/* Enochian throne squares - larger as per rules */
+.enochian-board .throne-square {
+    background: radial-gradient(circle, rgba(191,64,255,0.6), transparent);
+    border: 3px solid var(--cyber-purple);
+    box-shadow: 0 0 20px rgba(191,64,255,0.8);
+    position: relative;
+    transform: scale(1.1);
+}
+
+.double-piece {
+    font-size: 2rem;
+    letter-spacing: -4px;
+    text-shadow: 0 0 15px currentColor;
+}
+  
+/* ========================================
+   Authentic Chaturaji L-shaped Territories  
+======================================== */
+
+.chaturaji-board .territory-yellow {
+    background: linear-gradient(to right, rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.2));
+    border: 2px solid rgba(255, 215, 0, 0.8);
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.chaturaji-board .territory-blue {
+    background: linear-gradient(to bottom, rgba(0, 191, 255, 0.5), rgba(0, 191, 255, 0.2));
+    border: 2px solid rgba(0, 191, 255, 0.8);
+    box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.3);
+}
+
+.chaturaji-board .territory-red {
+    background: linear-gradient(to right, rgba(255, 68, 68, 0.5), rgba(255, 68, 68, 0.2));
+    border: 2px solid rgba(255, 68, 68, 0.8);
+    box-shadow: inset 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+.chaturaji-board .territory-green {
+    background: linear-gradient(to top, rgba(50, 205, 50, 0.5), rgba(50, 205, 50, 0.2));
+    border: 2px solid rgba(50, 205, 50, 0.8);
+    box-shadow: inset 0 0 10px rgba(50, 205, 50, 0.3);
+}
+
+/* Directional indicators for piece orientations */
+.chaturaji-board .territory-blue::before {
+    content: "↓";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    color: rgba(0, 191, 255, 0.8);
+}
+
+.chaturaji-board .territory-yellow::before {
+    content: "→";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    color: rgba(255, 215, 0, 0.8);
+}
+
+.chaturaji-board .territory-red::before {
+    content: "→";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    color: rgba(255, 68, 68, 0.8);
+}
+
+.chaturaji-board .territory-green::before {
+    content: "↑";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    color: rgba(50, 205, 50, 0.8);
+}
+
+/* Clear visual separation between territories */
+.chaturaji-board .chess-square {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+  
+/* ========================================
+   Fixed Enochian Throne Square Borders
+======================================== */
+
+.enochian-board .throne-square {
+    background: radial-gradient(circle, rgba(191, 64, 255, 0.6), transparent 70%);
+    border: 3px solid var(--cyber-purple) !important;
+    box-shadow: 
+        inset 0 0 15px rgba(191, 64, 255, 0.8),
+        0 0 20px rgba(191, 64, 255, 0.6);
+    position: relative;
+    z-index: 10;
+    transform: scale(1.05);
+}
+
+.enochian-board .throne-square::before {
+    content: '👑';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 1rem;
+    opacity: 0.8;
+    z-index: 15;
+    filter: drop-shadow(0 0 5px var(--cyber-purple));
+}
+
+/* Ensure adjacent squares don't overlap throne borders */
+.enochian-board .chess-square {
+    z-index: 1;
+    position: relative;
+}
+
+.enochian-board .chess-square:not(.throne-square) {
+    z-index: 5;
+}
   

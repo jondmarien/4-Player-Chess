@@ -1,0 +1,5 @@
+{
+  "agentCanUpdateSnapshot": true,
+  "start": "uv run src/main.py",
+  "install": "uv sync"
+}

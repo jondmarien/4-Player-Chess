@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}About - 4-Player Chess{% endblock %}
+
+{% block content %}
+<div class="ascii-header">
+┌─────────────────────────────┐
+│     📖 ABOUT PROJECT        │
+│   Chess Variants & History  │
+└─────────────────────────────┘
+</div>
+
+<h1 class="app-title">About 4-Player Chess</h1>
+<p class="subtitle">Ancient variants meets modern technology</p>
+
+<!-- Project Overview -->
+<div class="cyber-card hacker-border">
+    <h3>🏰 Project Overview</h3>
+    <p>A modern, real-time multiplayer implementation of 4-player chess variants including <strong>Chaturaji</strong> (ancient Indian) and <strong>Enochian Chess</strong> (Victorian occult) with WebSocket synchronization and cybersecurity-focused architecture.</p>
+    
+    <div class="terminal-text" style="margin: 20px 0;">
+Built with ❤️ by Jon
+Cybersecurity • Gaming • Modern Web Tech
+    </div>
+</div>
+
+<!-- Chaturaji Information -->
+<div class="cyber-card">
+    <h3 style="color: var(--player-red);">🕌 Chaturaji (Ancient Indian Variant)</h3>
+    
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+        <div>
+            <h4>📜 Historical Background</h4>
+            <ul style="color: var(--cyber-light-gray); margin-left: 20px;">
+                <li>Originated in ancient India (6th-7th century)</li>
+                <li>Predecessor to modern chess</li>
+                <li>Mentioned in Sanskrit literature</li>
+                <li>Played by Indian royalty and nobility</li>
+            </ul>
+            
+            <h4 style="margin-top: 25px;">🎯 Game Objective</h4>
+            <p style="color: var(--cyber-light-gray);">Score the highest points by capturing enemy pieces. Game ends when one player loses all pieces or time expires.</p>
+        </div>
+        
+        <div>
+            <h4>⚡ Unique Rules</h4>
+            <div class="terminal-text" style="font-size: 0.9rem; padding: 15px;">
+<strong>Scoring System:</strong>
+• King/Horse: 3 points
+• Elephant/Boat: 5 points  
+• Pawn: 1 point
+
+<strong>Special Moves:</strong>
+• Boat: 2 squares diagonally (jumping)
+• Multiple king checks: +1 or +5 bonus
+• Dead armies remain on board
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enochian Chess Information -->
+<div class="cyber-card">
+    <h3 style="color: var(--player-blue);">🔮 Enochian Chess (Victorian Occult Variant)</h3>
+    
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+        <div>
+            <h4>📚 Historical Background</h4>
+            <ul style="color: var(--cyber-light-gray); margin-left: 20px;">
+                <li>Developed by the Hermetic Order of the Golden Dawn</li>
+                <li>Created in late 19th century England</li>
+                <li>Based on Enochian magical system</li>
+                <li>Used for divination and magical practice</li>
+            </ul>
+            
+            <h4 style="margin-top: 25px;">🎯 Game Objective</h4>
+            <p style="color: var(--cyber-light-gray);">Team-based gameplay: Blue/Black alliance vs Red/Yellow alliance. Win by capturing both enemy kings.</p>
+        </div>
+        
+        <div>
+            <h4>⚡ Unique Rules</h4>
+            <div class="terminal-text" style="font-size: 0.9rem; padding: 15px;">
+<strong>Team Structure:</strong>
+• Blue & Black vs Red & Yellow
+• Coordinated team strategy required
+
+<strong>Special Moves:</strong>
+• Queen: Leaps exactly 2 squares
+• Throne squares: Double occupancy
+• Team victory conditions
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Technology Stack -->
+<div class="cyber-card">
+    <h3>💻 Technology Stack</h3>
+    
+    <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px;">
+        <div class="terminal-text" style="text-align: center; padding: 20px;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">🖥️</div>
+            <strong>Frontend</strong><br>
+            <span style="color: var(--cyber-light-gray);">
+                HTMX + WebSocket<br>
+                Vanilla JS<br>
+                Pico CSS
+            </span>
+        </div>
+        
+        <div class="terminal-text" style="text-align: center; padding: 20px;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">⚙️</div>
+            <strong>Backend</strong><br>
+            <span style="color: var(--cyber-light-gray);">
+                FastAPI + WS<br>
+                SQLAlchemy<br>
+                Pydantic
+            </span>
+        </div>
+        
+        <div class="terminal-text" style="text-align: center; padding: 20px;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">🗄️</div>
+            <strong>Database</strong><br>
+            <span style="color: var(--cyber-light-gray);">
+                PostgreSQL<br>
+                Redis Cache<br>
+                Alembic
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Security Features -->
+<div class="cyber-card">
+    <h3>🔒 Security Features</h3>
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+        <div>
+            <h4>🛡️ Application Security</h4>
+            <ul style="color: var(--cyber-light-gray); margin-left: 20px;">
+                <li>Server-side move validation</li>
+                <li>Rate limiting on moves</li>
+                <li>Input sanitization & validation</li>
+                <li>JWT token authentication</li>
+            </ul>
+        </div>
+        <div>
+            <h4>🔐 Anti-Cheat Measures</h4>
+            <ul style="color: var(--cyber-light-gray); margin-left: 20px;">
+                <li>WebSocket connection security</li>
+                <li>SQL injection prevention</li>
+                <li>CORS protection</li>
+                <li>Server-authoritative game state</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Links & Resources -->
+<div class="cyber-card">
+    <h3>🔗 Links & Resources</h3>
+    <div class="button-group">
+        <button class="cyber-button" onclick="location.href='https://github.com/jondmarien/4-player-chess'">
+            📚 Documentation
+        </button>
+        <button class="cyber-button" onclick="location.href='https://github.com/jondmarien/4-player-chess/issues'">
+            🐛 Report Issues
+        </button>
+        <button class="cyber-button" onclick="location.href='/lobby'">
+            🎮 Start Playing
+        </button>
+    </div>
+</div>
+
+<!-- Footer Quote -->
+<div class="status-bar" style="margin-top: 40px;">
+    <div class="cursor-blink">"Ready to revolutionize 4-player chess? Let's code! 🚀"</div>
+    <div class="websocket-status">
+        <span>Built with cybersecurity principles</span>
+    </div>
+</div>
+{% endblock %}

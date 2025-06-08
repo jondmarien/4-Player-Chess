@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Game {{ game_id }} - 4-Player Chess{% endblock %}
+
+{% block content %}
+<div id="game-container" class="game-container" 
+     hx-ws="connect:ws://localhost:8000/ws/game/{{ game_id }}?player_id=player1">
+
+    <!-- Game Header -->
+    <div class="game-header">
+        <div class="ascii-header">
+♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜
+♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟
+· · · · · · · ·
+· · · · · · · ·
+· · · · · · · ·
+· · · · · · · ·
+♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙
+♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖
+        </div>
+        
+        <h2>Game: {{ game_id[:8] }}...</h2>
+        <p>
+            Variant: 
+            <strong 
+                {% if variant == 'enochian' %}
+                    style="color: var(--cyber-purple);"
+                {% else %}
+                    style="color: var(--cyber-green);"
+                {% endif %}
+            >
+                {{ variant.title() }}
+                {% if variant == 'enochian' %}🔮{% elif variant == 'chaturaji' %}🕌{% endif %}
+            </strong>
+        </p>
+        
+        <div class="status-bar">
+            <div>Current Player: <span id="current-player" style="color: var(--player-red);">Red</span></div>
+            <div class="websocket-status">
+                <span class="ws-indicator connected"></span>
+                <span>Connected</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left Player Info -->
+    <div class="player-info-left">
+        <div class="player-panel green active">
+            <div class="player-name">🟢 Green Player</div>
+            <div class="player-score">Score: <span id="green-score">0</span></div>
+            <div class="player-status">
+                <span class="connection-status connected"></span>Connected
+            </div>
+        </div>
+        
+        <div class="player-panel yellow">
+            <div class="player-name">🟡 Yellow Player</div>
+            <div class="player-score">Score: <span id="yellow-score">0</span></div>
+            <div class="player-status">
+                <span class="connection-status disconnected"></span>Waiting...
+            </div>
+        </div>
+    </div>
+
+    <!-- Chess Board -->
+    <div class="game-board-container">
+        <div class="chess-board-wrapper">
+            <div id="chess-board-content"
+                hx-get="/api/board/{{ game_id }}" 
+                hx-trigger="load" 
+                hx-target="this" 
+                hx-swap="innerHTML">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <span style="margin-left: 15px;">Loading {{ variant }} board...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Right Player Info -->
+    <div class="player-info-right">
+        <div class="player-panel blue">
+            <div class="player-name">🔵 Blue Player</div>
+            <div class="player-score">Score: <span id="blue-score">0</span></div>
+            <div class="player-status">
+                <span class="connection-status disconnected"></span>Waiting...
+            </div>
+        </div>
+        
+        <div class="player-panel red">
+            <div class="player-name">🔴 Red Player</div>
+            <div class="player-score">Score: <span id="red-score">0</span></div>
+            <div class="player-status">
+                <span class="connection-status connected"></span>Connected
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Footer -->
+    <div class="game-footer">
+        <div class="move-history">
+            <h4>Move History</h4>
+            <div id="moves-list" hx-ws="trigger:game-update" hx-swap="innerHTML">
+                <div class="move-item">
+                    <span class="move-player" style="color: var(--player-red);">Red</span>
+                    <span class="move-notation">e2-e4</span>
+                    <span style="color: var(--cyber-light-gray);">00:01</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button class="cyber-button" onclick="location.href='/lobby'">
+                ← Leave Game
+            </button>
+            <button class="cyber-button" id="resign-btn">
+                🏳️ Resign
+            </button>
+            <button class="cyber-button" id="offer-draw">
+                🤝 Offer Draw
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/board.js"></script>
+<script src="/static/js/pieces.js"></script>
+
+<script>
+// WebSocket message handling
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle WebSocket events from HTMX
+    document.body.addEventListener('htmx:wsOpen', function(e) {
+        console.log('WebSocket connected to game {{ game_id }}');
+        document.querySelector('.ws-indicator').classList.add('connected');
+    });
+    
+    document.body.addEventListener('htmx:wsClose', function(e) {
+        console.log('WebSocket disconnected');
+        document.querySelector('.ws-indicator').classList.remove('connected');
+        document.querySelector('.ws-indicator').classList.add('disconnected');
+    });
+    
+    document.body.addEventListener('htmx:wsMessage', function(e) {
+        const message = JSON.parse(e.detail.message);
+        console.log('Game update:', message);
+        
+        // Handle different message types
+        if (message.type === 'game_state') {
+            updateGameState(message.data);
+        } else if (message.type === 'move_made') {
+            updateBoard(message.data);
+        } else if (message.type === 'player_joined') {
+            updatePlayerStatus(message.player, 'connected');
+        }
+    });
+});
+
+function updateGameState(gameState) {
+    // Update scores, current player, etc.
+    console.log('Updating game state:', gameState);
+}
+
+function updateBoard(moveData) {
+    // Update board with new move
+    console.log('Move made:', moveData);
+}
+
+function updatePlayerStatus(player, status) {
+    // Update player connection status
+    console.log(`Player ${player} is now ${status}`);
+}
+</script>
+{% endblock %}
