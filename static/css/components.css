@@ -1,0 +1,133 @@
+/* ========================================
+   Reusable Components
+======================================== */
+
+/* Card Components */
+.cyber-card {
+    background: rgba(42, 42, 42, 0.9);
+    border: 1px solid var(--cyber-gray);
+    border-radius: 8px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cyber-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyber-green), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .cyber-card:hover::before {
+    left: 100%;
+  }
+  
+  .cyber-card:hover {
+    border-color: var(--cyber-green);
+    box-shadow: var(--glow-cyber);
+    transform: translateY(-5px);
+  }
+  
+  /* Form Components */
+  .cyber-input {
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid var(--cyber-gray);
+    color: var(--cyber-green);
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  .cyber-input:focus {
+    outline: none;
+    border-color: var(--cyber-green);
+    box-shadow: var(--glow-cyber);
+    background: rgba(26, 26, 26, 1);
+  }
+  
+  .cyber-input::placeholder {
+    color: var(--cyber-light-gray);
+  }
+  
+  /* Modal/Popup Components */
+  .cyber-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+  }
+  
+  .cyber-modal-content {
+    background: var(--cyber-dark);
+    border: 2px solid var(--cyber-green);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: var(--glow-cyber);
+    position: relative;
+  }
+  
+  .cyber-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--cyber-green);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  /* Toast Notifications */
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .toast {
+    background: rgba(26, 26, 26, 0.95);
+    border: 1px solid var(--cyber-green);
+    border-radius: 4px;
+    padding: 15px 20px;
+    color: var(--cyber-green);
+    font-family: var(--font-mono);
+    animation: slideIn 0.3s ease-out;
+    max-width: 300px;
+    box-shadow: var(--glow-cyber);
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  

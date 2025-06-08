@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-Player Chess</title>
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <link href="/static/css/game.css" rel="stylesheet">
+    <link href="/static/css/components.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <nav class="cyber-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">🏰 4-Player Chess</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/lobby">Lobby</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="ascii-header">
+    ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜
+    ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟
+    · · · · · · · ·
+    · · · · · · · ·
+    · · · · · · · ·
+    · · · · · · · ·
+    ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙
+    ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖
+        </div>
+        
+        <h1 class="app-title">4-Player Chess</h1>
+        <p class="subtitle">Real-time multiplayer chess with Chaturaji and Enochian variants</p>
+        
+        <div class="grid">
+            <div class="cyber-card hacker-border">
+                <h3>🎮 Quick Game</h3>
+                <p>Join a random 4-player game</p>
+                <button class="cyber-button primary" onclick="location.href='/game/quick'">Start Playing</button>
+            </div>
+            
+            <div class="cyber-card hacker-border">
+                <h3>🏛️ Create Room</h3>
+                <p>Create a private game room</p>
+                <button class="cyber-button" onclick="location.href='/create'">Create Game</button>
+            </div>
+        </div>
+        
+        <details class="cyber-card" style="margin-top: 30px;">
+            <summary style="color: var(--cyber-green); font-weight: bold; cursor: pointer;">Game Variants</summary>
+            <ul style="margin-top: 15px; padding-left: 20px;">
+                <li><strong>Chaturaji</strong>: Ancient Indian 4-player variant with scoring</li>
+                <li><strong>Enochian Chess</strong>: Victorian team-based variant</li>
+            </ul>
+        </details>
+        
+        <div class="status-bar">
+            <div>Ready to revolutionize 4-player chess?</div>
+            <div class="websocket-status">
+                <span class="ws-indicator connected"></span>
+                <span class="cursor-blink">System Online</span>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

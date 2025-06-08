@@ -1,0 +1,698 @@
+/* ========================================
+   4-Player Chess - Cybersecurity Theme
+   Built with ❤️ by Jon
+======================================== */
+
+:root {
+    /* Cybersecurity Color Palette */
+    --cyber-black: #0a0a0a;
+    --cyber-dark: #1a1a1a;
+    --cyber-gray: #2a2a2a;
+    --cyber-light-gray: #3a3a3a;
+    --cyber-green: #00ff41;
+    --cyber-blue: #00d4ff;
+    --cyber-red: #ff0040;
+    --cyber-yellow: #ffff00;
+    --cyber-purple: #bf40ff;
+    --cyber-orange: #ff8c00;
+    
+    /* Chess Colors */
+    --player-red: #ff4444;
+    --player-blue: #4488ff;
+    --player-yellow: #ffdd44;
+    --player-green: #44ff88;
+    
+    /* Terminal Fonts */
+    --font-mono: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+    --font-display: 'Orbitron', 'Rajdhani', sans-serif;
+    
+    /* Sizes */
+    --board-size: min(80vh, 80vw);
+    --square-size: calc(var(--board-size) / 8);
+    
+    /* Effects */
+    --glow-cyber: 0 0 10px var(--cyber-green), 0 0 20px var(--cyber-green), 0 0 30px var(--cyber-green);
+    --glow-red: 0 0 10px var(--player-red);
+    --glow-blue: 0 0 10px var(--player-blue);
+    --glow-yellow: 0 0 10px var(--player-yellow);
+    --glow-green: 0 0 10px var(--player-green);
+  }
+  
+  /* ========================================
+     Base Styling & Typography
+  ======================================== */
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(135deg, var(--cyber-black) 0%, var(--cyber-dark) 100%);
+    color: var(--cyber-green);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--cyber-dark);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--cyber-green);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--cyber-blue);
+  }
+  
+  /* ========================================
+     ASCII Art & Headers
+  ======================================== */
+  
+  .ascii-header {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1;
+    color: var(--cyber-green);
+    text-shadow: var(--glow-cyber);
+    text-align: center;
+    margin: 20px 0;
+    white-space: pre;
+  }
+  
+  .app-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--cyber-green), var(--cyber-blue));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: var(--glow-cyber);
+  }
+  
+  .subtitle {
+    color: var(--cyber-light-gray);
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  /* ========================================
+     Navigation & Header
+  ======================================== */
+  
+  .cyber-nav {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--cyber-green);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--cyber-green);
+    text-decoration: none;
+    text-shadow: var(--glow-cyber);
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+  
+  .nav-links a {
+    color: var(--cyber-light-gray);
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-family: var(--font-mono);
+  }
+  
+  .nav-links a:hover {
+    color: var(--cyber-green);
+    border-color: var(--cyber-green);
+    box-shadow: var(--glow-cyber);
+  }
+  
+  /* ========================================
+     Game Layout & Structure
+  ======================================== */
+  
+  .game-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+    min-height: calc(100vh - 100px);
+  }
+  
+  .game-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    background: rgba(42, 42, 42, 0.5);
+    border: 1px solid var(--cyber-green);
+    border-radius: 8px;
+    box-shadow: var(--glow-cyber);
+  }
+  
+  .game-board-container {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .player-info-left {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .player-info-right {
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .game-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(42, 42, 42, 0.5);
+    border: 1px solid var(--cyber-green);
+    border-radius: 8px;
+  }
+  
+  /* ========================================
+     4-Player Chess Board
+  ======================================== */
+  
+  .chess-board {
+    width: var(--board-size);
+    height: var(--board-size);
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    border: 2px solid var(--cyber-green);
+    box-shadow: var(--glow-cyber);
+    position: relative;
+    background: var(--cyber-dark);
+  }
+  
+  .chess-square {
+    width: var(--square-size);
+    height: var(--square-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .chess-square.light {
+    background: #3a3a3a;
+  }
+  
+  .chess-square.dark {
+    background: #2a2a2a;
+  }
+  
+  .chess-square:hover {
+    background: rgba(0, 255, 65, 0.2) !important;
+    box-shadow: inset 0 0 10px var(--cyber-green);
+  }
+  
+  .chess-square.selected {
+    background: rgba(0, 212, 255, 0.3) !important;
+    box-shadow: inset 0 0 15px var(--cyber-blue);
+    border: 2px solid var(--cyber-blue);
+  }
+  
+  .chess-square.valid-move {
+    background: rgba(255, 255, 0, 0.2) !important;
+    box-shadow: inset 0 0 10px var(--cyber-yellow);
+  }
+  
+  .chess-square.last-move {
+    background: rgba(255, 140, 0, 0.3) !important;
+    box-shadow: inset 0 0 10px var(--cyber-orange);
+  }
+  
+  /* ========================================
+     Chess Pieces
+  ======================================== */
+  
+  .chess-piece {
+    font-size: 2.5rem;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s ease;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+    z-index: 10;
+  }
+  
+  .chess-piece:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px currentColor);
+  }
+  
+  .chess-piece:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+  }
+  
+  .chess-piece.dragging {
+    transform: scale(1.2);
+    z-index: 1000;
+    pointer-events: none;
+  }
+  
+  /* Player-specific piece colors */
+  .piece-red { color: var(--player-red); text-shadow: var(--glow-red); }
+  .piece-blue { color: var(--player-blue); text-shadow: var(--glow-blue); }
+  .piece-yellow { color: var(--player-yellow); text-shadow: var(--glow-yellow); }
+  .piece-green { color: var(--player-green); text-shadow: var(--glow-green); }
+  
+  /* ========================================
+     Player Information Panels
+  ======================================== */
+  
+  .player-panel {
+    background: rgba(42, 42, 42, 0.8);
+    border: 1px solid var(--cyber-gray);
+    border-radius: 8px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+  }
+  
+  .player-panel.active {
+    border-color: var(--cyber-green);
+    box-shadow: var(--glow-cyber);
+    background: rgba(42, 42, 42, 0.95);
+  }
+  
+  .player-panel.red { border-left: 4px solid var(--player-red); }
+  .player-panel.blue { border-left: 4px solid var(--player-blue); }
+  .player-panel.yellow { border-left: 4px solid var(--player-yellow); }
+  .player-panel.green { border-left: 4px solid var(--player-green); }
+  
+  .player-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--cyber-green);
+  }
+  
+  .player-score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+    font-family: var(--font-mono);
+  }
+  
+  .player-status {
+    font-size: 0.9rem;
+    color: var(--cyber-light-gray);
+    margin-top: 10px;
+  }
+  
+  .connection-status {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .connection-status.connected { background: var(--cyber-green); box-shadow: var(--glow-cyber); }
+  .connection-status.disconnected { background: var(--cyber-red); }
+  
+  /* ========================================
+     Move History & Game Info
+  ======================================== */
+  
+  .move-history {
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid var(--cyber-gray);
+    border-radius: 8px;
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .move-history h4 {
+    color: var(--cyber-green);
+    margin-bottom: 15px;
+    font-family: var(--font-display);
+  }
+  
+  .move-item {
+    padding: 8px 12px;
+    margin: 5px 0;
+    background: rgba(58, 58, 58, 0.5);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .move-item:nth-child(even) {
+    background: rgba(58, 58, 58, 0.7);
+  }
+  
+  .move-player {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .move-notation {
+    color: var(--cyber-light-gray);
+  }
+  
+  /* ========================================
+     Game Controls & Buttons
+  ======================================== */
+  
+  .cyber-button {
+    background: linear-gradient(45deg, var(--cyber-dark), var(--cyber-gray));
+    color: var(--cyber-green);
+    border: 1px solid var(--cyber-green);
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .cyber-button:hover {
+    background: linear-gradient(45deg, var(--cyber-gray), var(--cyber-light-gray));
+    box-shadow: var(--glow-cyber);
+    transform: translateY(-2px);
+  }
+  
+  .cyber-button:active {
+    transform: translateY(0);
+  }
+  
+  .cyber-button.primary {
+    background: linear-gradient(45deg, var(--cyber-green), var(--cyber-blue));
+    color: var(--cyber-black);
+    border-color: var(--cyber-blue);
+  }
+  
+  .cyber-button.danger {
+    background: linear-gradient(45deg, var(--cyber-red), #ff6666);
+    color: white;
+    border-color: var(--cyber-red);
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  /* ========================================
+     Status Messages & Alerts
+  ======================================== */
+  
+  .status-bar {
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--cyber-green);
+    padding: 15px;
+    border: 1px solid var(--cyber-green);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .websocket-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .ws-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  
+  .ws-indicator.connected {
+    background: var(--cyber-green);
+    box-shadow: var(--glow-cyber);
+  }
+  
+  .ws-indicator.disconnected {
+    background: var(--cyber-red);
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .alert {
+    padding: 15px 20px;
+    border-radius: 4px;
+    margin: 10px 0;
+    border-left: 4px solid;
+    font-family: var(--font-mono);
+  }
+  
+  .alert.success {
+    background: rgba(0, 255, 65, 0.1);
+    border-color: var(--cyber-green);
+    color: var(--cyber-green);
+  }
+  
+  .alert.error {
+    background: rgba(255, 0, 64, 0.1);
+    border-color: var(--cyber-red);
+    color: var(--cyber-red);
+  }
+  
+  .alert.warning {
+    background: rgba(255, 255, 0, 0.1);
+    border-color: var(--cyber-yellow);
+    color: var(--cyber-yellow);
+  }
+  
+  /* ========================================
+     Loading & Animations
+  ======================================== */
+  
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--cyber-gray);
+    border-top: 3px solid var(--cyber-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* ========================================
+     Responsive Design
+  ======================================== */
+  
+  @media (max-width: 1200px) {
+    .game-container {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto;
+      gap: 15px;
+    }
+    
+    .game-board-container {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    
+    .player-info-left,
+    .player-info-right {
+      grid-column: 1;
+      grid-row: 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    
+    :root {
+      --board-size: min(70vh, 90vw);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .app-title {
+      font-size: 2rem;
+    }
+    
+    .chess-piece {
+      font-size: 2rem;
+    }
+    
+    :root {
+      --board-size: min(60vh, 95vw);
+    }
+    
+    .nav-container {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .player-info-left,
+    .player-info-right {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* ========================================
+     Terminal/Console Effects
+  ======================================== */
+  
+  .terminal-text {
+    font-family: var(--font-mono);
+    background: var(--cyber-black);
+    color: var(--cyber-green);
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--cyber-green);
+    white-space: pre-wrap;
+    overflow-x: auto;
+    text-shadow: 0 0 5px var(--cyber-green);
+  }
+  
+  .cursor-blink::after {
+    content: '█';
+    animation: blink 1s infinite;
+    color: var(--cyber-green);
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  /* ========================================
+     Easter Eggs & Special Effects
+  ======================================== */
+  
+  .matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.05;
+    background-image: 
+      linear-gradient(90deg, var(--cyber-green) 1px, transparent 1px),
+      linear-gradient(var(--cyber-green) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: matrix-scroll 20s linear infinite;
+  }
+  
+  @keyframes matrix-scroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(20px); }
+  }
+  
+  .hacker-border {
+    position: relative;
+    border: 1px solid var(--cyber-green);
+  }
+  
+  .hacker-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--cyber-green), var(--cyber-blue), var(--cyber-green));
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .hacker-border:hover::before {
+    opacity: 0.3;
+  }
+  
