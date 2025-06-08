@@ -1,6 +1,3 @@
-# 4-Player Chess README
-
-```markdown
 # 🏰 4-Player Chess
 
 ```
@@ -24,7 +21,7 @@ A modern, real-time multiplayer implementation of 4-player chess variants includ
 
 ## 🚀 Quick Start
 
-```
+```sh
 # Clone and setup
 git clone <your-repo-url>
 cd 4player-chess
@@ -54,7 +51,7 @@ http://localhost:8000
 - Reconnection handling
 - Spectator mode
 
-### **Security Features** 
+### **Security Features**
 - Server-side move validation
 - Rate limiting on moves
 - Input sanitization
@@ -118,7 +115,7 @@ http://localhost:8000
 ### **Windows Setup**
 
 **1. Install UV**
-```
+```sh
 irm https://astral.sh/uv/install.ps1 | iex
 ```
 
@@ -139,7 +136,7 @@ wsl sudo apt install redis-server
 ```
 
 **4. Setup Project**
-```
+```sh
 # Clone repository
 git clone <your-repo-url>
 cd 4player-chess
@@ -153,7 +150,7 @@ cp .env.example .env
 ```
 
 **5. Initialize Database**
-```
+```sh
 # Create database
 createdb -U postgres chess4p
 
@@ -163,7 +160,7 @@ uv run alembic upgrade head
 
 ### **Development Commands**
 
-```
+```sh
 # Start development server
 uv run src/main.py
 
@@ -242,7 +239,7 @@ Events:
 
 ## 🧪 Testing
 
-```
+```sh
 # Run all tests
 uv run pytest
 
@@ -274,7 +271,7 @@ player:{player_id}:session     # Player session data
 ## 🚀 Deployment
 
 ### **Production Setup**
-```
+```sh
 # Environment variables
 export DATABASE_URL="postgresql://user:pass@localhost/chess4p"
 export REDIS_URL="redis://localhost:6379/0"
@@ -286,7 +283,7 @@ gunicorn src.main:app -w 4 -k uvicorn.workers.UvicornWorker
 ```
 
 ### **Docker Deployment**
-```
+```sh
 # Dockerfile included
 docker build -t chess4p .
 docker run -p 8000:8000 chess4p
@@ -314,7 +311,7 @@ docker run -p 8000:8000 chess4p
 
 ## 🤝 Contributing
 
-```
+```sh
 # Setup development environment
 git clone <repo>
 cd 4player-chess
@@ -341,10 +338,8 @@ MIT License - see LICENSE file for details.
 
 ---
 
-```
-Built with ❤️ by Jon
+Built with ❤️ by Jon  
 Cybersecurity -  Gaming -  Modern Web Tech
-```
 
 ## 📚 Chess Variants Resources
 
@@ -361,6 +356,3 @@ Cybersecurity -  Gaming -  Modern Web Tech
 ---
 
 *Ready to revolutionize 4-player chess? Let's code! 🚀*
-```
-
-This README incorporates ASCII art that matches your terminal customization interests[1] while providing comprehensive documentation for your chess project. The hacker-themed styling[2] and detailed technical sections align with your cybersecurity background and love for well-structured development projects.
