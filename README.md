@@ -204,11 +204,11 @@ uv run ruff check src/
 ┌─────────────────────────────────────────┐
 │             Security Layer              │
 ├─────────────────────────────────────────┤
-│ -  Server-side move validation           │
-│ -  Rate limiting (3 moves/second)        │
-│ -  Input sanitization & validation       │
+│ -  Server-side move validation          │
+│ -  Rate limiting (3 moves/second)       │
+│ -  Input sanitization & validation      │
 │ -  JWT token authentication             │
-│ -  WebSocket connection security         │
+│ -  WebSocket connection security        │
 │ -  SQL injection prevention             │
 │ -  CORS protection                      │
 └─────────────────────────────────────────┘
