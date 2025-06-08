@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Create Game - 4-Player Chess{% endblock %}
+
+{% block content %}
+<div class="ascii-header">
+┌─────────────────────────────┐
+│     ⚔️  CREATE GAME         │
+│   Configure Your Match      │
+└─────────────────────────────┘
+</div>
+
+<h1 class="app-title">Create New Game</h1>
+<p class="subtitle">Set up a custom 4-player chess match</p>
+
+<form id="create-game-form" 
+      hx-post="/api/games/create"
+      hx-target="#game-result"
+      hx-swap="innerHTML">
+
+    <!-- Game Variant Selection -->
+    <div class="cyber-card hacker-border">
+        <h3>🎯 Game Variant</h3>
+        <div style="display: grid; gap: 20px; margin-top: 20px;">
+            
+            <label class="variant-option" style="display: flex; align-items: start; gap: 15px; padding: 20px; border: 1px solid var(--cyber-gray); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
+                <input type="radio" name="variant" value="chaturaji" checked style="margin-top: 5px;">
+                <div>
+                    <strong style="color: var(--cyber-green); font-size: 1.2rem;">Chaturaji</strong>
+                    <p style="margin: 10px 0; color: var(--cyber-light-gray);">Ancient Indian 4-player variant with scoring system</p>
+                    <ul style="color: var(--cyber-light-gray); font-size: 0.9rem; margin-left: 20px;">
+                        <li>Individual scoring (King/Horse=3pts, Elephant/Boat=5pts, Pawn=1pt)</li>
+                        <li>Boats move 2 squares diagonally</li>
+                        <li>Bonus points for checking multiple kings</li>
+                        <li>Game ends when all pieces captured or time limit</li>
+                    </ul>
+                </div>
+            </label>
+            
+            <label class="variant-option" style="display: flex; align-items: start; gap: 15px; padding: 20px; border: 1px solid var(--cyber-gray); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
+                <input type="radio" name="variant" value="enochian" style="margin-top: 5px;">
+                <div>
+                    <strong style="color: var(--cyber-blue); font-size: 1.2rem;">Enochian Chess</strong>
+                    <p style="margin: 10px 0; color: var(--cyber-light-gray);">Victorian occult team-based variant</p>
+                    <ul style="color: var(--cyber-light-gray); font-size: 0.9rem; margin-left: 20px;">
+                        <li>Team play: Blue/Black vs Red/Yellow</li>
+                        <li>Queens leap exactly 2 squares in any direction</li>
+                        <li>Throne square double occupancy rules</li>
+                        <li>Win by capturing both enemy kings</li>
+                    </ul>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Game Settings -->
+    <div class="cyber-card">
+        <h3>⚙️ Game Settings</h3>
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            
+            <div>
+                <label for="room-name">Room Name:</label>
+                <input type="text" 
+                       id="room-name" 
+                       name="room_name" 
+                       class="cyber-input" 
+                       placeholder="Epic Chess Battle"
+                       maxlength="50"
+                       required>
+            </div>
+            
+            <div>
+                <label for="host-name">Your Name:</label>
+                <input type="text" 
+                       id="host-name" 
+                       name="host_name" 
+                       class="cyber-input" 
+                       placeholder="Chess Master"
+                       maxlength="30"
+                       required>
+            </div>
+            
+            <div>
+                <label for="time-limit">Time Limit (minutes):</label>
+                <select id="time-limit" name="time_limit" class="cyber-input">
+                    <option value="0">No Limit</option>
+                    <option value="10">10 minutes</option>
+                    <option value="15">15 minutes</option>
+                    <option value="30" selected>30 minutes</option>
+                    <option value="60">1 hour</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="room-privacy">Room Privacy:</label>
+                <select id="room-privacy" name="privacy" class="cyber-input">
+                    <option value="public">Public (visible in lobby)</option>
+                    <option value="private" selected>Private (invite only)</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Advanced Settings -->
+        <details style="margin-top: 20px;">
+            <summary style="color: var(--cyber-green); cursor: pointer; margin-bottom: 15px;">⚡ Advanced Settings</summary>
+            
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label>
+                        <input type="checkbox" name="spectators_allowed" checked>
+                        Allow Spectators
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" name="move_hints" checked>
+                        Show Move Hints
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" name="sound_effects" checked>
+                        Sound Effects
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" name="auto_save">
+                        Auto-save Game
+                    </label>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- Create Button -->
+    <div class="button-group" style="justify-content: center; margin: 30px 0;">
+        <button type="submit" class="cyber-button primary" style="font-size: 1.2rem; padding: 15px 40px;">
+            🚀 Create Game Room
+        </button>
+        <button type="button" class="cyber-button" onclick="location.href='/lobby'">
+            ← Back to Lobby
+        </button>
+    </div>
+</form>
+
+<!-- Result Display -->
+<div id="game-result"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Style variant option selection
+    const variantOptions = document.querySelectorAll('.variant-option');
+    const radioInputs = document.querySelectorAll('input[name="variant"]');
+    
+    function updateVariantStyles() {
+        variantOptions.forEach((option, index) => {
+            if (radioInputs[index].checked) {
+                option.style.borderColor = 'var(--cyber-green)';
+                option.style.backgroundColor = 'rgba(0, 255, 65, 0.1)';
+                option.style.boxShadow = 'var(--glow-cyber)';
+            } else {
+                option.style.borderColor = 'var(--cyber-gray)';
+                option.style.backgroundColor = 'transparent';
+                option.style.boxShadow = 'none';
+            }
+        });
+    }
+    
+    radioInputs.forEach(radio => {
+        radio.addEventListener('change', updateVariantStyles);
+    });
+    
+    updateVariantStyles(); // Initial styling
+});
+</script>
+{% endblock %}

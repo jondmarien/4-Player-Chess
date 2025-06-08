@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}4-Player Chess{% endblock %}</title>
+    
+    <!-- Pico CSS + Custom Cybersecurity Theme -->
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css" rel="stylesheet">
+    <link href="/static/css/game.css" rel="stylesheet">
+    <link href="/static/css/components.css" rel="stylesheet">
+    
+    <!-- Terminal Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- HTMX for interactivity -->
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <nav class="cyber-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">🏰 4-Player Chess</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/lobby">Lobby</a></li>
+                <li><a href="/create">Create</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Toast notifications container -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

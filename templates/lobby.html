@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Game Lobby - 4-Player Chess{% endblock %}
+
+{% block content %}
+<div class="ascii-header">
+┌─────────────────────────────┐
+│      🏛️ GAME LOBBY          │
+│   Available Chess Matches   │
+└─────────────────────────────┘
+</div>
+
+<h1 class="app-title">Game Lobby</h1>
+<p class="subtitle">Join an existing game or wait for players</p>
+
+<!-- Active Games Section -->
+<div class="cyber-card hacker-border">
+    <h3>🎮 Active Games</h3>
+    <div id="games-list" 
+         hx-get="/api/games/active" 
+         hx-trigger="load, every 5s"
+         hx-target="this"
+         hx-swap="innerHTML">
+        <div class="loading">
+            <div class="loading-spinner"></div>
+            <span style="margin-left: 15px;">Scanning for active games...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="button-group" style="margin: 30px 0;">
+    <button class="cyber-button primary" 
+            hx-post="/api/games/quick-match"
+            hx-target="#toast-container"
+            hx-swap="afterbegin">
+        🚀 Quick Match
+    </button>
+    
+    <button class="cyber-button" onclick="location.href='/create'">
+        ➕ Create Room
+    </button>
+    
+    <button class="cyber-button" 
+            hx-get="/api/games/active"
+            hx-target="#games-list"
+            hx-swap="innerHTML">
+        🔄 Refresh
+    </button>
+</div>
+
+<!-- Join by Room Code -->
+<div class="cyber-card">
+    <h3>🔑 Join by Room Code</h3>
+    <form hx-post="/api/games/join" 
+          hx-target="#toast-container"
+          hx-swap="afterbegin"
+          style="display: flex; gap: 15px; align-items: end;">
+        <div style="flex: 1;">
+            <label for="room-code">Room Code:</label>
+            <input type="text" 
+                   id="room-code" 
+                   name="room_code" 
+                   class="cyber-input" 
+                   placeholder="Enter 6-digit code"
+                   pattern="[A-Z0-9]{6}"
+                   maxlength="6"
+                   required>
+        </div>
+        <div>
+            <label for="player-name">Your Name:</label>
+            <input type="text" 
+                   id="player-name" 
+                   name="player_name" 
+                   class="cyber-input" 
+                   placeholder="Player name"
+                   required>
+        </div>
+        <button type="submit" class="cyber-button primary">Join Game</button>
+    </form>
+</div>
+
+<!-- Player Statistics -->
+<div class="cyber-card">
+    <h3>📊 Your Stats</h3>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+        <div class="terminal-text" style="text-align: center; padding: 15px;">
+            <div style="font-size: 2rem; color: var(--cyber-green);">0</div>
+            <div>Games Played</div>
+        </div>
+        <div class="terminal-text" style="text-align: center; padding: 15px;">
+            <div style="font-size: 2rem; color: var(--cyber-blue);">0</div>
+            <div>Wins</div>
+        </div>
+        <div class="terminal-text" style="text-align: center; padding: 15px;">
+            <div style="font-size: 2rem; color: var(--cyber-yellow);">1200</div>
+            <div>Rating</div>
+        </div>
+    </div>
+</div>
+
+<!-- Connection Status -->
+<div class="status-bar">
+    <div class="websocket-status">
+        <span class="ws-indicator connected"></span>
+        <span>Connected to lobby</span>
+    </div>
+    <div class="cursor-blink">Awaiting chess masters...</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-refresh games list and handle real-time updates
+document.addEventListener('DOMContentLoaded', function() {
+    // Convert room codes to uppercase as user types
+    const roomCodeInput = document.getElementById('room-code');
+    if (roomCodeInput) {
+        roomCodeInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+    }
+});
+</script>
+{% endblock %}
