@@ -12,7 +12,11 @@ router = APIRouter(prefix="/api", tags=["games"])
 
 @router.get("/games/active")
 async def get_active_games():
-    """Get list of active games for lobby display"""
+    """Get list of active games with proper player counts"""
+    
+    # Clean up stale games first
+    GameStateManager.cleanup_empty_games()
+    
     games = GameStateManager.get_active_games()
     games_html = ""
     
@@ -27,7 +31,15 @@ async def get_active_games():
         """
     else:
         for game_id, game_data in games.items():
-            player_count = len(game_data.get('players', []))
+            # Count only connected players
+            all_players = game_data.get('players', [])
+            connected_players = [p for p in all_players if p.get('connected', True)]
+            player_count = len(connected_players)
+            
+            # Skip games with no players (shouldn't happen after cleanup, but safety check)
+            if player_count == 0:
+                continue
+                
             games_html += f"""
             <div class="cyber-card" style="margin: 10px 0; padding: 15px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -36,15 +48,18 @@ async def get_active_games():
                         <div style="color: var(--cyber-light-gray); font-size: 0.9rem;">
                             {game_data.get('variant', 'chaturaji').title()} • {player_count}/4 players
                         </div>
+                        <div style="color: var(--cyber-blue); font-size: 0.8rem;">
+                            Room: {game_id[:6].upper()} • Created: {game_data.get('created_at', 'Unknown')[:16]}
+                        </div>
                     </div>
                     <div style="display: flex; gap: 10px; align-items: center;">
-                        <div style="color: var(--cyber-blue);">Room: {game_id[:6].upper()}</div>
                         <button class="cyber-button" 
                                 hx-post="/api/games/join" 
-                                hx-vals='{{"room_code": "{game_id}", "player_name": "Player"}}' 
+                                hx-vals='{{"room_code": "{game_id[:6]}", "player_name": "Player"}}' 
                                 hx-target="#toast-container" 
-                                hx-swap="afterbegin">
-                            Join Game
+                                hx-swap="afterbegin"
+                                {"disabled" if player_count >= 4 else ""}>
+                            {"Game Full" if player_count >= 4 else "Join Game"}
                         </button>
                     </div>
                 </div>
@@ -55,65 +70,19 @@ async def get_active_games():
 
 @router.post("/games/quick-match")
 async def quick_match():
-    """Find or create a quick match game"""
+    """Enhanced quick match with proper player management"""
     
-    # Look for games with less than 4 players
-    for game_id, game_data in active_games.items():
-        if len(game_data["players"]) < 4 and game_data["settings"]["privacy"] == "public":
-            # Join this game
-            colors = ["red", "blue", "yellow", "green"]
-            taken_colors = [p["color"] for p in game_data["players"]]
-            available_color = next(color for color in colors if color not in taken_colors)
-            
-            game_data["players"].append({
-                "name": f"Quick Player {len(game_data['players']) + 1}",
-                "color": available_color,
-                "connected": True
-            })
-            
-            success_html = f"""
-            <div class="toast" style="border-color: var(--cyber-blue);">
-                🎮 Joining quick match! Variant: Chaturaji<br>
-                <button class="cyber-button" onclick="location.href='/game/{game_id}'" style="margin-top: 10px;">
-                    Enter Game Room
-                </button>
-            </div>
-            <script>
-                setTimeout(() => {{
-                    location.href = '/game/{game_id}';
-                }}, 1500);
-            </script>
-            """
-            return HTMLResponse(success_html)
+    # Clean up stale games first
+    GameStateManager.cleanup_empty_games()
     
-    # No available games, create a new Chaturaji quick match
-    game_id = str(uuid.uuid4())
-    game_data = {
-        "id": game_id,
-        "name": "Quick Match - Chaturaji",
-        "variant": "chaturaji",  # This was the issue - always chaturaji
-        "host": "Quick Player 1",
-        "created_at": datetime.now().isoformat(),
-        "status": "waiting",
-        "players": [{"name": "Quick Player 1", "color": "red", "connected": True}],
-        "settings": {
-            "time_limit": 30,
-            "privacy": "public",
-            "spectators_allowed": True,
-            "move_hints": True,
-            "sound_effects": True,
-            "auto_save": False
-        },
-        "current_player": 0,
-        "scores": {"red": 0, "blue": 0, "yellow": 0, "green": 0}
-    }
-    
-    active_games[game_id] = game_data
+    # Get or create quick game (this now returns empty player list)
+    game_data = GameStateManager.get_or_create_quick_game()
+    game_id = game_data['id']
     
     success_html = f"""
     <div class="toast" style="border-color: var(--cyber-blue);">
-        🎮 Created new quick match! Waiting for players...<br>
-        <strong>Variant: Chaturaji</strong><br>
+        🎮 Joining quick match! Variant: Chaturaji<br>
+        <strong>Room: {game_id[:6].upper()}</strong><br>
         <button class="cyber-button" onclick="location.href='/game/{game_id}'" style="margin-top: 10px;">
             Enter Game Room
         </button>
@@ -126,6 +95,7 @@ async def quick_match():
     """
     
     return HTMLResponse(success_html)
+
 
 @router.post("/games/create")
 async def create_game(

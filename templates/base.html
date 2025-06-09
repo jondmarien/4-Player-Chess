@@ -1,24 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}4-Player Chess{% endblock %}</title>
     
-    <!-- Pico CSS + Custom Cybersecurity Theme -->
+    <!-- Load in correct order: base variables first, then components -->
     <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css" rel="stylesheet">
     <link href="/static/css/game.css" rel="stylesheet">
     <link href="/static/css/components.css" rel="stylesheet">
     
-    <!-- Terminal Fonts (including your VT323) -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     
-    <!-- HTMX for interactivity -->
+    <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    
+    <!-- CRITICAL: Apply theme before page renders -->
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem('chess-theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = storedTheme || (systemPrefersDark ? 'dark' : 'light');
+            
+            document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+            console.log(`🎨 Theme applied immediately: ${theme}`);
+        })();
+    </script>
     
     {% block extra_head %}{% endblock %}
 </head>
+    
 <body>
     <div class="matrix-bg"></div>
     
@@ -31,6 +44,15 @@
                 <li><a href="/create">Create</a></li>
                 <li><a href="/about">About</a></li>
             </ul>
+            
+            <!-- Theme Toggle Button -->
+            <div class="theme-toggle-container">
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+                    <span class="theme-icon dark-icon">🌙</span>
+                    <span class="theme-icon light-icon">☀️</span>
+                    <span class="toggle-text">Dark</span>
+                </button>
+            </div>
         </div>
     </nav>
     
@@ -41,6 +63,8 @@
     <!-- Toast notifications container -->
     <div id="toast-container" class="toast-container"></div>
     
+    <!-- CRITICAL: Theme toggle script loaded on ALL pages -->
+    <script src="/static/js/theme-toggle.js"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

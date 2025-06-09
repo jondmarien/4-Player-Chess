@@ -1,133 +1,322 @@
 /* ========================================
-   Reusable Components
+   FIXED Reusable Components with Proper Theme Integration
 ======================================== */
 
-/* Card Components */
+/* Force CSS variable inheritance */
+* {
+  /* Ensure all elements can access CSS variables */
+  --inherited-bg: var(--bg-primary);
+  --inherited-text: var(--text-primary);
+}
+
+/* Force form elements to inherit theme variables */
+input, select, textarea, button {
+  color-scheme: inherit;
+}
+
+/* ========================================
+   Card Components - Using CSS Variables
+======================================== */
+
 .cyber-card {
-    background: rgba(42, 42, 42, 0.9);
-    border: 1px solid var(--cyber-gray);
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  padding: 25px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  color: var(--card-text);
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  transition: left 0.5s ease;
+}
+
+.cyber-card:hover::before {
+  left: 100%;
+}
+
+.cyber-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-3px);
+}
+
+/* FIXED: Card text elements */
+.cyber-card h1,
+.cyber-card h2,
+.cyber-card h3,
+.cyber-card h4,
+.cyber-card h5,
+.cyber-card h6 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.cyber-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.cyber-card strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ========================================
+   FIXED Form Components
+======================================== */
+
+.cyber-input,
+.cyber-input[type="text"],
+.cyber-input[type="email"],
+.cyber-input[type="password"],
+input.cyber-input,
+select.cyber-input,
+textarea.cyber-input {
+  background: var(--input-bg) !important;
+  border: 2px solid var(--input-border) !important;
+  color: var(--input-text) !important;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  width: 100%;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.cyber-input:focus,
+.cyber-input[type="text"]:focus,
+.cyber-input[type="email"]:focus,
+.cyber-input[type="password"]:focus,
+input.cyber-input:focus,
+select.cyber-input:focus,
+textarea.cyber-input:focus {
+  outline: none !important;
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), var(--shadow-glow) !important;
+  background: var(--input-bg) !important;
+}
+
+.cyber-input::placeholder,
+.cyber-input[type="text"]::placeholder,
+.cyber-input[type="email"]::placeholder,
+.cyber-input[type="password"]::placeholder,
+input.cyber-input::placeholder,
+textarea.cyber-input::placeholder {
+  color: var(--input-placeholder) !important;
+  font-weight: 400;
+}
+
+/* FIXED: Select dropdowns */
+select.cyber-input {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+  appearance: none;
+}
+
+/* ========================================
+   FIXED Modal/Popup Components
+======================================== */
+
+.cyber-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(8px);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.cyber-modal-content {
+  background: var(--card-bg);
+  border: 2px solid var(--accent-primary);
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: var(--shadow-glow);
+  position: relative;
+  color: var(--card-text);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.cyber-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: var(--accent-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.cyber-modal-close:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: scale(1.1);
+}
+
+/* ========================================
+   FIXED Toast Notifications
+======================================== */
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: var(--card-bg);
+  border: 2px solid var(--accent-primary);
+  border-radius: 8px;
+  padding: 15px 20px;
+  color: var(--card-text);
+  font-family: var(--font-mono);
+  animation: slideIn 0.3s ease-out;
+  max-width: 320px;
+  box-shadow: var(--shadow-glow);
+  backdrop-filter: blur(8px);
+  font-weight: 500;
+}
+
+/* Toast variants */
+.toast.success {
+  border-color: #10b981;
+  background: var(--card-bg);
+}
+
+.toast.error {
+  border-color: var(--accent-danger);
+  background: var(--card-bg);
+}
+
+.toast.warning {
+  border-color: var(--accent-warning);
+  background: var(--card-bg);
+}
+
+/* ========================================
+   Additional Fixed Components
+======================================== */
+
+/* Loading Spinner */
+.cyber-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-secondary);
+  border-top: 3px solid var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Labels */
+label {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+  font-family: var(--font-mono);
+}
+
+/* Details/Summary */
+details.cyber-card summary {
+  color: var(--accent-primary) !important;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+details.cyber-card li {
+  color: var(--text-secondary) !important;
+  margin: 8px 0;
+}
+
+details.cyber-card strong {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+}
+
+/* ========================================
+   Animations
+======================================== */
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-20px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+   Responsive Design
+======================================== */
+
+@media (max-width: 768px) {
+  .cyber-card {
+    padding: 20px;
     border-radius: 8px;
-    padding: 25px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .cyber-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--cyber-green), transparent);
-    transition: left 0.5s ease;
-  }
-  
-  .cyber-card:hover::before {
-    left: 100%;
-  }
-  
-  .cyber-card:hover {
-    border-color: var(--cyber-green);
-    box-shadow: var(--glow-cyber);
-    transform: translateY(-5px);
-  }
-  
-  /* Form Components */
-  .cyber-input {
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid var(--cyber-gray);
-    color: var(--cyber-green);
-    padding: 12px 16px;
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    width: 100%;
-    transition: all 0.3s ease;
-  }
-  
-  .cyber-input:focus {
-    outline: none;
-    border-color: var(--cyber-green);
-    box-shadow: var(--glow-cyber);
-    background: rgba(26, 26, 26, 1);
-  }
-  
-  .cyber-input::placeholder {
-    color: var(--cyber-light-gray);
-  }
-  
-  /* Modal/Popup Components */
-  .cyber-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    backdrop-filter: blur(5px);
   }
   
   .cyber-modal-content {
-    background: var(--cyber-dark);
-    border: 2px solid var(--cyber-green);
-    border-radius: 8px;
-    padding: 30px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: var(--glow-cyber);
-    position: relative;
-  }
-  
-  .cyber-modal-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    color: var(--cyber-green);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 5px;
-  }
-  
-  /* Toast Notifications */
-  .toast-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 3000;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin: 20px;
+    padding: 25px;
   }
   
   .toast {
-    background: rgba(26, 26, 26, 0.95);
-    border: 1px solid var(--cyber-green);
-    border-radius: 4px;
-    padding: 15px 20px;
-    color: var(--cyber-green);
-    font-family: var(--font-mono);
-    animation: slideIn 0.3s ease-out;
-    max-width: 300px;
-    box-shadow: var(--glow-cyber);
+    max-width: 280px;
+    font-size: 0.9rem;
   }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
+}

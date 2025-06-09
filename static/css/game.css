@@ -4,6 +4,41 @@
 ======================================== */
 
 :root {
+    /* Dark Mode (Default) - your hacker theme */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2a2a2a;
+    --bg-quaternary: #3a3a3a;
+    
+    --text-primary: #00ff41;
+    --text-secondary: #e0e0e0;
+    --text-tertiary: #a0a0a0;
+    
+    --accent-primary: #00ff41;
+    --accent-secondary: #00d4ff;
+    --accent-danger: #ff0040;
+    --accent-warning: #ffff00;
+    --accent-purple: #bf40ff;
+    
+    --border-primary: #00ff41;
+    --border-secondary: #2a2a2a;
+    --border-subtle: #3a3a3a;
+    
+    --shadow-glow: 0 0 10px var(--accent-primary), 0 0 20px var(--accent-primary);
+    
+    /* Component-specific variables */
+    --input-bg: rgba(26, 26, 26, 0.9);
+    --input-border: #2a2a2a;
+    --input-text: #00ff41;
+    --input-placeholder: #a0a0a0;
+    
+    --card-bg: rgba(42, 42, 42, 0.9);
+    --card-border: #2a2a2a;
+    --card-text: #e0e0e0;
+    
+    /* Theme indicator */
+    --theme-mode: "dark";
+    
     /* Cybersecurity Color Palette */
     --cyber-black: #0a0a0a;
     --cyber-dark: #1a1a1a;
@@ -38,6 +73,43 @@
     --glow-green: 0 0 10px var(--player-green);
   }
   
+  /* FIXED Light Mode - Off-White Background & Brighter Blue */
+  :root[data-theme="light"] {
+    /* Off-white backgrounds - easier on eyes than pure white */
+    --bg-primary: #fefefe;          /* Off-white instead of pure white */
+    --bg-secondary: #f8fafe;        /* Very light blue-tinted background */
+    --bg-tertiary: #f1f5f9;         /* Light slate background */
+    --bg-quaternary: #e2e8f0;       /* Medium slate background */
+    
+    /* High contrast text - much more readable */
+    --text-primary: #1e293b;        /* Dark slate instead of pure black */
+    --text-secondary: #475569;      /* Medium slate for secondary text */
+    --text-tertiary: #64748b;       /* Lighter slate for tertiary text */
+    
+    /* Brighter, more accessible blue accent colors */
+    --accent-primary: #3b82f6;      /* Bright blue - great contrast on off-white */
+    --accent-secondary: #2563eb;    /* Slightly darker blue for variety */
+    --accent-danger: #ef4444;       /* Bright red */
+    --accent-warning: #f59e0b;      /* Bright amber */
+    --accent-purple: #8b5cf6;       /* Bright purple */
+    
+    --border-primary: #3b82f6;      /* Bright blue borders */
+    --border-secondary: #e2e8f0;    /* Light borders */
+    --border-subtle: #cbd5e1;       /* Subtle borders */
+    
+    --shadow-glow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    
+    /* FIXED: Light mode component variables */
+    --input-bg: #ffffff;            /* Pure white for form inputs */
+    --input-border: #cbd5e1;        /* Light border for inputs */
+    --input-text: #1e293b;          /* Dark text for inputs */
+    --input-placeholder: #94a3b8;   /* Medium gray for placeholders */
+    
+    --card-bg: #ffffff;             /* White card backgrounds */
+    --card-border: #e2e8f0;         /* Light card borders */
+    --card-text: #1e293b;           /* Dark card text */
+  }
+  
   /* ========================================
      Base Styling & Typography
   ======================================== */
@@ -49,13 +121,14 @@
   }
   
   body {
-    background: linear-gradient(135deg, var(--cyber-black) 0%, var(--cyber-dark) 100%);
-    color: var(--cyber-green);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    color: var(--text-primary);
     font-family: var(--font-mono);
     font-size: 14px;
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
+    transition: all 0.3s ease;
   }
   
   /* Scrollbar Styling */
@@ -64,16 +137,16 @@
   }
   
   ::-webkit-scrollbar-track {
-    background: var(--cyber-dark);
+    background: var(--bg-secondary);
   }
   
   ::-webkit-scrollbar-thumb {
-    background: var(--cyber-green);
+    background: var(--accent-primary);
     border-radius: 4px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--cyber-blue);
+    background: var(--accent-secondary);
   }
   
   /* ========================================
@@ -84,8 +157,8 @@
     font-family: var(--font-mono);
     font-size: 12px;
     line-height: 1;
-    color: var(--cyber-green);
-    text-shadow: var(--glow-cyber);
+    color: var(--accent-primary);
+    text-shadow: var(--shadow-glow);
     text-align: center;
     margin: 20px 0;
     white-space: pre;
@@ -95,17 +168,17 @@
     font-family: var(--font-display);
     font-size: 3rem;
     font-weight: 700;
-    background: linear-gradient(45deg, var(--cyber-green), var(--cyber-blue));
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
     margin: 20px 0;
-    text-shadow: var(--glow-cyber);
+    text-shadow: var(--shadow-glow);
   }
   
   .subtitle {
-    color: var(--cyber-light-gray);
+    color: var(--text-tertiary);
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 30px;
@@ -116,9 +189,9 @@
   ======================================== */
   
   .cyber-nav {
-    background: rgba(26, 26, 26, 0.95);
+    background: rgba(var(--bg-secondary-rgb, 26, 26, 26), 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--cyber-green);
+    border-bottom: 1px solid var(--accent-primary);
     padding: 15px 0;
     position: sticky;
     top: 0;
@@ -138,9 +211,9 @@
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--cyber-green);
+    color: var(--accent-primary);
     text-decoration: none;
-    text-shadow: var(--glow-cyber);
+    text-shadow: var(--shadow-glow);
   }
   
   .nav-links {
@@ -154,7 +227,7 @@
   }
   
   .nav-links a {
-    color: var(--cyber-light-gray);
+    color: var(--text-tertiary);
     text-decoration: none;
     padding: 10px 15px;
     border: 1px solid transparent;
@@ -164,9 +237,9 @@
   }
   
   .nav-links a:hover {
-    color: var(--cyber-green);
-    border-color: var(--cyber-green);
-    box-shadow: var(--glow-cyber);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
   }
   
   /* ========================================
@@ -188,10 +261,10 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 20px;
-    background: rgba(42, 42, 42, 0.5);
-    border: 1px solid var(--cyber-green);
+    background: rgba(var(--bg-secondary-rgb, 42, 42, 42), 0.5);
+    border: 1px solid var(--accent-primary);
     border-radius: 8px;
-    box-shadow: var(--glow-cyber);
+    box-shadow: var(--shadow-glow);
   }
   
   .game-board-container {
@@ -221,8 +294,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background: rgba(42, 42, 42, 0.5);
-    border: 1px solid var(--cyber-green);
+    background: rgba(var(--bg-secondary-rgb, 42), 0.5);
+    border: 1px solid var(--accent-primary);
     border-radius: 8px;
   }
   
@@ -236,10 +309,10 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
-    border: 2px solid var(--cyber-green);
-    box-shadow: var(--glow-cyber);
+    border: 2px solid var(--accent-primary);
+    box-shadow: var(--shadow-glow);
     position: relative;
-    background: var(--cyber-dark);
+    background: var(--bg-secondary);
   }
   
   .chess-square {
@@ -255,32 +328,32 @@
   }
   
   .chess-square.light {
-    background: #3a3a3a;
+    background: var(--board-light);
   }
   
   .chess-square.dark {
-    background: #2a2a2a;
+    background: var(--board-dark);
   }
   
   .chess-square:hover {
-    background: rgba(0, 255, 65, 0.2) !important;
-    box-shadow: inset 0 0 10px var(--cyber-green);
+    background-color: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2) !important;
+    box-shadow: inset 0 0 15px var(--accent-primary);
   }
   
   .chess-square.selected {
     background: rgba(0, 212, 255, 0.3) !important;
-    box-shadow: inset 0 0 15px var(--cyber-blue);
-    border: 2px solid var(--cyber-blue);
+    box-shadow: inset 0 0 15px var(--accent-secondary);
+    border: 2px solid var(--accent-secondary);
   }
   
   .chess-square.valid-move {
     background: rgba(255, 255, 0, 0.2) !important;
-    box-shadow: inset 0 0 10px var(--cyber-yellow);
+    box-shadow: inset 0 0 10px var(--accent-warning);
   }
   
   .chess-square.last-move {
     background: rgba(255, 140, 0, 0.3) !important;
-    box-shadow: inset 0 0 10px var(--cyber-orange);
+    box-shadow: inset 0 0 10px var(--accent-orange);
   }
   
   /* ========================================
@@ -338,7 +411,7 @@
 
 .enochian-board .throne-square {
     background: radial-gradient(circle, rgba(191, 64, 255, 0.6), transparent 70%);
-    border: 3px solid var(--cyber-purple) !important;
+    border: 3px solid var(--accent-purple) !important;
     box-shadow: 
         inset 0 0 15px rgba(191, 64, 255, 0.8),
         0 0 20px rgba(191, 64, 255, 0.6);
@@ -355,7 +428,7 @@
     font-size: 1rem;
     opacity: 0.8;
     z-index: 15;
-    filter: drop-shadow(0 0 5px var(--cyber-purple));
+    filter: drop-shadow(0 0 5px var(--accent-purple));
 }
 
 .throne-pieces {
@@ -396,8 +469,8 @@
   ======================================== */
   
   .player-panel {
-    background: rgba(42, 42, 42, 0.8);
-    border: 1px solid var(--cyber-gray);
+    background: rgba(var(--bg-secondary-rgb, 42), 0.8);
+    border: 1px solid var(--bg-tertiary);
     border-radius: 8px;
     padding: 20px;
     backdrop-filter: blur(5px);
@@ -405,9 +478,9 @@
   }
   
   .player-panel.active {
-    border-color: var(--cyber-green);
-    box-shadow: var(--glow-cyber);
-    background: rgba(42, 42, 42, 0.95);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+    background: rgba(var(--bg-secondary-rgb, 42), 0.95);
   }
   
   .player-panel.red { border-left: 4px solid var(--player-red); }
@@ -420,7 +493,7 @@
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 10px;
-    color: var(--cyber-green);
+    color: var(--accent-primary);
   }
   
   .player-score {
@@ -432,7 +505,7 @@
   
   .player-status {
     font-size: 0.9rem;
-    color: var(--cyber-light-gray);
+    color: var(--text-tertiary);
     margin-top: 10px;
   }
   
@@ -444,16 +517,16 @@
     margin-right: 8px;
   }
   
-  .connection-status.connected { background: var(--cyber-green); box-shadow: var(--glow-cyber); }
-  .connection-status.disconnected { background: var(--cyber-red); }
+  .connection-status.connected { background: var(--accent-primary); box-shadow: var(--shadow-glow); }
+  .connection-status.disconnected { background: var(--accent-danger); }
   
   /* ========================================
      Move History & Game Info
   ======================================== */
   
   .move-history {
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid var(--cyber-gray);
+    background: rgba(var(--bg-secondary-rgb, 26), 0.9);
+    border: 1px solid var(--bg-tertiary);
     border-radius: 8px;
     padding: 20px;
     max-height: 300px;
@@ -461,7 +534,7 @@
   }
   
   .move-history h4 {
-    color: var(--cyber-green);
+    color: var(--accent-primary);
     margin-bottom: 15px;
     font-family: var(--font-display);
   }
@@ -469,7 +542,7 @@
   .move-item {
     padding: 8px 12px;
     margin: 5px 0;
-    background: rgba(58, 58, 58, 0.5);
+    background: rgba(var(--bg-secondary-rgb, 58), 0.5);
     border-radius: 4px;
     font-family: var(--font-mono);
     font-size: 0.9rem;
@@ -479,7 +552,7 @@
   }
   
   .move-item:nth-child(even) {
-    background: rgba(58, 58, 58, 0.7);
+    background: rgba(var(--bg-secondary-rgb, 58), 0.7);
   }
   
   .move-player {
@@ -488,7 +561,7 @@
   }
   
   .move-notation {
-    color: var(--cyber-light-gray);
+    color: var(--text-tertiary);
   }
   
   /* ========================================
@@ -496,9 +569,9 @@
   ======================================== */
   
   .cyber-button {
-    background: linear-gradient(45deg, var(--cyber-dark), var(--cyber-gray));
-    color: var(--cyber-green);
-    border: 1px solid var(--cyber-green);
+    background: linear-gradient(45deg, var(--bg-secondary), var(--bg-tertiary));
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
     padding: 12px 24px;
     border-radius: 4px;
     font-family: var(--font-mono);
@@ -513,8 +586,8 @@
   }
   
   .cyber-button:hover {
-    background: linear-gradient(45deg, var(--cyber-gray), var(--cyber-light-gray));
-    box-shadow: var(--glow-cyber);
+    background: linear-gradient(45deg, var(--bg-tertiary), var(--bg-quaternary));
+    box-shadow: var(--shadow-glow);
     transform: translateY(-2px);
   }
   
@@ -523,15 +596,15 @@
   }
   
   .cyber-button.primary {
-    background: linear-gradient(45deg, var(--cyber-green), var(--cyber-blue));
-    color: var(--cyber-black);
-    border-color: var(--cyber-blue);
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--bg-primary);
+    border-color: var(--accent-secondary);
   }
   
   .cyber-button.danger {
-    background: linear-gradient(45deg, var(--cyber-red), #ff6666);
+    background: linear-gradient(45deg, var(--accent-danger), #ff6666);
     color: white;
-    border-color: var(--cyber-red);
+    border-color: var(--accent-danger);
   }
   
   .button-group {
@@ -545,10 +618,10 @@
   ======================================== */
   
   .status-bar {
-    background: rgba(0, 0, 0, 0.9);
-    color: var(--cyber-green);
+    background: var(--bg-primary);
+    color: var(--accent-primary);
     padding: 15px;
-    border: 1px solid var(--cyber-green);
+    border: 1px solid var(--accent-primary);
     border-radius: 4px;
     font-family: var(--font-mono);
     margin: 20px 0;
@@ -571,12 +644,12 @@
   }
   
   .ws-indicator.connected {
-    background: var(--cyber-green);
-    box-shadow: var(--glow-cyber);
+    background: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
   }
   
   .ws-indicator.disconnected {
-    background: var(--cyber-red);
+    background: var(--accent-danger);
   }
   
   @keyframes pulse {
@@ -594,20 +667,20 @@
   
   .alert.success {
     background: rgba(0, 255, 65, 0.1);
-    border-color: var(--cyber-green);
-    color: var(--cyber-green);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
   }
   
   .alert.error {
     background: rgba(255, 0, 64, 0.1);
-    border-color: var(--cyber-red);
-    color: var(--cyber-red);
+    border-color: var(--accent-danger);
+    color: var(--accent-danger);
   }
   
   .alert.warning {
     background: rgba(255, 255, 0, 0.1);
-    border-color: var(--cyber-yellow);
-    color: var(--cyber-yellow);
+    border-color: var(--accent-warning);
+    color: var(--accent-warning);
   }
   
   /* ========================================
@@ -624,8 +697,8 @@
   .loading-spinner {
     width: 40px;
     height: 40px;
-    border: 3px solid var(--cyber-gray);
-    border-top: 3px solid var(--cyber-green);
+    border: 3px solid var(--bg-tertiary);
+    border-top: 3px solid var(--accent-primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -704,20 +777,20 @@
   
   .terminal-text {
     font-family: var(--font-mono);
-    background: var(--cyber-black);
-    color: var(--cyber-green);
+    background: var(--bg-primary);
+    color: var(--accent-primary);
     padding: 15px;
     border-radius: 4px;
-    border: 1px solid var(--cyber-green);
+    border: 1px solid var(--accent-primary);
     white-space: pre-wrap;
     overflow-x: auto;
-    text-shadow: 0 0 5px var(--cyber-green);
+    text-shadow: 0 0 5px var(--accent-primary);
   }
   
   .cursor-blink::after {
     content: '█';
     animation: blink 1s infinite;
-    color: var(--cyber-green);
+    color: var(--accent-primary);
   }
   
   @keyframes blink {
@@ -739,10 +812,11 @@
     z-index: -1;
     opacity: 0.05;
     background-image: 
-      linear-gradient(90deg, var(--cyber-green) 1px, transparent 1px),
-      linear-gradient(var(--cyber-green) 1px, transparent 1px);
+      linear-gradient(90deg, var(--accent-primary) 1px, transparent 1px),
+      linear-gradient(var(--accent-primary) 1px, transparent 1px);
     background-size: 20px 20px;
     animation: matrix-scroll 20s linear infinite;
+    transition: opacity 0.3s ease;
   }
   
   @keyframes matrix-scroll {
@@ -752,7 +826,7 @@
   
   .hacker-border {
     position: relative;
-    border: 1px solid var(--cyber-green);
+    border: 1px solid var(--accent-primary);
   }
   
   .hacker-border::before {
@@ -762,7 +836,7 @@
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, var(--cyber-green), var(--cyber-blue), var(--cyber-green));
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
     z-index: -1;
     border-radius: inherit;
     opacity: 0;
@@ -784,9 +858,9 @@
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     gap: 1px;
-    background: var(--cyber-green);
-    border: 3px solid var(--cyber-green);
-    box-shadow: var(--glow-cyber);
+    background: var(--bg-secondary);
+    border: 3px solid var(--accent-primary);
+    box-shadow: var(--shadow-glow);
 }
 
 .chess-square {
@@ -801,17 +875,17 @@
 }
 
 .light-square {
-    background-color: #f0d9b5;
+    background-color: var(--board-light);
 }
 
 .dark-square {
-    background-color: #b58863;
+    background-color: var(--board-dark);
 }
 
 /* Throne squares for Enochian chess */
 .throne-square {
     background: radial-gradient(circle, rgba(191, 64, 255, 0.4), transparent 70%);
-    border: 2px solid var(--cyber-purple);
+    border: 2px solid var(--accent-purple);
     box-shadow: inset 0 0 20px rgba(191, 64, 255, 0.6);
 }
 
@@ -887,10 +961,10 @@
     width: max-content;
     margin: 0 auto;
     padding: 20px;
-    background: linear-gradient(45deg, var(--cyber-dark), var(--cyber-gray));
-    border: 3px solid var(--cyber-purple);
+    background: linear-gradient(45deg, var(--bg-secondary), var(--bg-tertiary));
+    border: 3px solid var(--accent-purple);
     border-radius: 10px;
-    box-shadow: var(--glow-cyber);
+    box-shadow: var(--shadow-glow);
 }
 
 .top-extensions, .bottom-extensions {
@@ -931,15 +1005,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(42, 42, 42, 0.8);
-    border: 1px solid var(--cyber-green);
+    background: rgba(var(--bg-secondary-rgb, 42), 0.8);
+    border: 1px solid var(--accent-primary);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .extension-square:hover {
-    background: rgba(0, 255, 65, 0.2);
-    box-shadow: inset 0 0 10px var(--cyber-green);
+    background: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2);
+    box-shadow: inset 0 0 10px var(--accent-primary);
 }
 
 .central-board {
@@ -950,10 +1024,10 @@
 }
 
 /* Elemental themed extensions */
-.element-air { border-color: var(--cyber-yellow); }
-.element-water { border-color: var(--cyber-blue); }
-.element-fire { border-color: var(--cyber-red); }
-.element-earth { border-color: var(--cyber-green); }
+.element-air { border-color: var(--accent-warning); }
+.element-water { border-color: var(--accent-secondary); }
+.element-fire { border-color: var(--accent-danger); }
+.element-earth { border-color: var(--accent-primary); }
 
 .board-spacer {
     width: 40px;
@@ -965,24 +1039,24 @@
    Chaturaji Territory Control Styling
 ======================================== */
 
-.chaturaji-board .yellow-territory {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), transparent 70%);
-    border: 1px solid rgba(255, 215, 0, 0.5);
+.chaturaji-board .territory-yellow {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
-.chaturaji-board .blue-territory {
-    background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), transparent 70%);
-    border: 1px solid rgba(0, 191, 255, 0.5);
+.chaturaji-board .territory-blue {
+    background: linear-gradient(135deg, rgba(0, 191, 255, 0.15), rgba(0, 191, 255, 0.05));
+    border: 1px solid rgba(0, 191, 255, 0.3);
 }
 
-.chaturaji-board .red-territory {
-    background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), transparent 70%);
-    border: 1px solid rgba(255, 68, 68, 0.5);
+.chaturaji-board .territory-red {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05));
+    border: 1px solid rgba(255, 68, 68, 0.3);
 }
 
-.chaturaji-board .green-territory {
-    background: linear-gradient(135deg, rgba(50, 205, 50, 0.3), transparent 70%);
-    border: 1px solid rgba(50, 205, 50, 0.5);
+.chaturaji-board .territory-green {
+    background: linear-gradient(135deg, rgba(50, 205, 50, 0.15), rgba(50, 205, 50, 0.05));
+    border: 1px solid rgba(50, 205, 50, 0.3);
 }
 
 /* ========================================
@@ -1012,7 +1086,7 @@
 /* Enochian throne squares - larger as per rules */
 .enochian-board .throne-square {
     background: radial-gradient(circle, rgba(191,64,255,0.6), transparent);
-    border: 3px solid var(--cyber-purple);
+    border: 3px solid var(--accent-purple);
     box-shadow: 0 0 20px rgba(191,64,255,0.8);
     position: relative;
     transform: scale(1.1);
@@ -1106,7 +1180,7 @@
 
 .enochian-board .throne-square {
     background: radial-gradient(circle, rgba(191, 64, 255, 0.6), transparent 70%);
-    border: 3px solid var(--cyber-purple) !important;
+    border: 3px solid var(--accent-purple) !important;
     box-shadow: 
         inset 0 0 15px rgba(191, 64, 255, 0.8),
         0 0 20px rgba(191, 64, 255, 0.6);
@@ -1123,7 +1197,7 @@
     font-size: 1rem;
     opacity: 0.8;
     z-index: 15;
-    filter: drop-shadow(0 0 5px var(--cyber-purple));
+    filter: drop-shadow(0 0 5px var(--accent-purple));
 }
 
 /* Ensure adjacent squares don't overlap throne borders */
@@ -1136,3 +1210,415 @@
     z-index: 5;
 }
   
+/* ========================================
+   Readable Chaturaji Territory Styling
+======================================== */
+
+.chaturaji-board .territory-yellow {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: inset 0 0 5px rgba(255, 215, 0, 0.1);
+}
+
+.chaturaji-board .territory-blue {
+    background: linear-gradient(135deg, rgba(0, 191, 255, 0.15), rgba(0, 191, 255, 0.05));
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    box-shadow: inset 0 0 5px rgba(0, 191, 255, 0.1);
+}
+
+.chaturaji-board .territory-red {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05));
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    box-shadow: inset 0 0 5px rgba(255, 68, 68, 0.1);
+}
+
+.chaturaji-board .territory-green {
+    background: linear-gradient(135deg, rgba(50, 205, 50, 0.15), rgba(50, 205, 50, 0.05));
+    border: 1px solid rgba(50, 205, 50, 0.3);
+    box-shadow: inset 0 0 5px rgba(50, 205, 50, 0.1);
+}
+
+/* Remove the directional arrows - they're too busy */
+.chaturaji-board .territory-blue::before,
+.chaturaji-board .territory-yellow::before,
+.chaturaji-board .territory-red::before,
+.chaturaji-board .territory-green::before {
+    display: none;
+}
+
+/* Enhanced piece visibility on darker backgrounds */
+.chess-piece {
+    font-size: 2.8rem;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s ease;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+    z-index: 10;
+    font-family: 'Segoe UI Symbol', 'Noto Color Emoji', serif;
+}
+
+.chess-piece:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px currentColor);
+    z-index: 20;
+}
+
+/* Better square hover effects */
+.chess-square:hover {
+    background-color: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2) !important;
+    box-shadow: inset 0 0 15px rgba(var(--accent-primary-rgb, 0, 255, 65), 0.4);
+    cursor: pointer;
+}
+
+.chess-square.selected {
+    background-color: rgba(0, 212, 255, 0.3) !important;
+    box-shadow: inset 0 0 20px rgba(0, 212, 255, 0.6);
+    border: 2px solid var(--accent-secondary);
+}
+
+/* Move highlighting styles */
+.chess-square.valid-move {
+    background-color: rgba(0, 255, 0, 0.3) !important;
+    box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.chess-square.capture-move {
+    background-color: rgba(255, 100, 100, 0.4) !important;
+    box-shadow: inset 0 0 15px rgba(255, 100, 100, 0.6);
+}
+
+.chess-square.last-move {
+    background-color: rgba(255, 165, 0, 0.4) !important;
+    box-shadow: inset 0 0 15px rgba(255, 165, 0, 0.6);
+    animation: moveHighlight 0.5s ease-in-out;
+}
+
+@keyframes moveHighlight {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ========================================
+   Theme Toggle Component
+======================================== */
+
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--accent-primary);
+  border-radius: 25px;
+  padding: 8px 16px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-quaternary);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.light-icon {
+  opacity: 0;
+  transform: rotate(180deg) scale(0);
+}
+
+.dark-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+:root[data-theme="light"] .light-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+:root[data-theme="light"] .dark-icon {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0);
+}
+
+.toggle-text {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Animated background for the toggle */
+.theme-toggle-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  transition: left 0.5s ease;
+  opacity: 0.3;
+}
+
+.theme-toggle-btn:hover::before {
+  left: 100%;
+}
+
+
+/* Keyboard navigation for theme toggle */
+.theme-toggle-btn:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.theme-toggle-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-btn,
+  .theme-icon,
+  .toggle-text,
+  .theme-notification {
+      transition: none;
+  }
+}
+
+/* ========================================
+   Force High Contrast in Light Mode
+======================================== */
+
+/* App title - make it dark and bold in light mode */
+:root[data-theme="light"] .app-title {
+  background: linear-gradient(135deg, #0f172a 0%, #2563eb 50%, #7c3aed 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  text-shadow: none;
+}
+
+/* Subtitle - dark gray in light mode */
+:root[data-theme="light"] .subtitle {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* Navigation links - dark in light mode */
+:root[data-theme="light"] .nav-links a {
+  color: var(--text-secondary);
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 8px 16px;
+}
+
+:root[data-theme="light"] .nav-links a:hover {
+  color: var(--accent-primary);
+  background: var(--surface-hover);
+  border-color: var(--accent-primary);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+}
+
+/* Logo - dark in light mode */
+:root[data-theme="light"] .nav-logo {
+  color: var(--accent-primary);
+  font-weight: 800;
+  text-shadow: none;
+}
+
+/* Cards - better contrast in light mode */
+:root[data-theme="light"] .cyber-card {
+  background: #ffffff;
+  border: 2px solid var(--border-subtle);
+  color: var(--text-primary);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+:root[data-theme="light"] .cyber-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+:root[data-theme="light"] .cyber-card h3 {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+:root[data-theme="light"] .cyber-card p {
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Buttons - high contrast in light mode */
+:root[data-theme="light"] .cyber-button {
+  background: #ffffff;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+:root[data-theme="light"] .cyber-button:hover {
+  background: var(--accent-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+
+:root[data-theme="light"] .cyber-button.primary {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-secondary);
+}
+
+:root[data-theme="light"] .cyber-button.primary:hover {
+  background: var(--accent-secondary);
+  box-shadow: 0 6px 16px rgba(29, 78, 216, 0.4);
+}
+
+/* Status bar - dark text in light mode */
+:root[data-theme="light"] .status-bar {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+/* Game variants text - dark in light mode */
+:root[data-theme="light"] details.cyber-card summary {
+  color: var(--accent-primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+:root[data-theme="light"] details.cyber-card li {
+  color: var(--text-secondary);
+  margin: 8px 0;
+}
+
+:root[data-theme="light"] details.cyber-card strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ========================================
+   Enhanced Theme Toggle with Better Light Mode
+======================================== */
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--accent-primary);
+  border-radius: 25px;
+  padding: 8px 16px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light mode specific styling for toggle button */
+:root[data-theme="light"] .theme-toggle-btn {
+  background: #ffffff;
+  border: 2px solid #2563eb;
+  color: #2563eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="light"] .theme-toggle-btn:hover {
+  background: #eff6ff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-quaternary);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   Enhanced Chess Game Elements for Light Mode
+======================================== */
+
+:root[data-theme="light"] .chaturaji-board .territory-yellow {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.06));
+  border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+:root[data-theme="light"] .chaturaji-board .territory-blue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.06));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+:root[data-theme="light"] .chaturaji-board .territory-red {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.06));
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+:root[data-theme="light"] .chaturaji-board .territory-green {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(34, 197, 94, 0.06));
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+:root[data-theme="light"] .piece-yellow { 
+  color: #ca8a04; 
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="light"] .piece-blue { 
+  color: #2563eb; 
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="light"] .piece-red { 
+  color: #dc2626; 
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="light"] .piece-green { 
+  color: #059669; 
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="light"] .piece-black { 
+  color: #374151; 
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="light"] .enochian-board .throne-square {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
+  border: 2px solid rgba(124, 58, 237, 0.3);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+}

@@ -1,30 +1,30 @@
-// Chess board interaction and WebSocket handling
 class ChessBoard {
     constructor(gameId) {
         this.gameId = gameId;
         this.selectedSquare = null;
         this.currentPlayer = 'red';
+        this.gameVariant = 'chaturaji'; // Will get from game state
         this.initializeBoard();
     }
     
     initializeBoard() {
-        console.log(`🏰 Initializing chess board for game: ${this.gameId}`);
+        console.log(`🏰 Initializing ${this.gameVariant} board for game: ${this.gameId}`);
         
         // Add click handlers to squares
         document.querySelectorAll('.chess-square').forEach(square => {
             square.addEventListener('click', (e) => this.handleSquareClick(e));
         });
         
-        // Add drag handlers to pieces
+        // Add piece interaction
+        this.updatePieceInteractions();
+    }
+    
+    updatePieceInteractions() {
         document.querySelectorAll('.chess-piece').forEach(piece => {
-            piece.addEventListener('dragstart', (e) => this.handleDragStart(e));
-            piece.addEventListener('dragend', (e) => this.handleDragEnd(e));
-        });
-        
-        // Add drop handlers to squares
-        document.querySelectorAll('.chess-square').forEach(square => {
-            square.addEventListener('dragover', (e) => this.handleDragOver(e));
-            square.addEventListener('drop', (e) => this.handleDrop(e));
+            piece.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.handlePieceClick(e);
+            });
         });
     }
     
@@ -36,10 +36,19 @@ class ChessBoard {
             // Try to move piece
             this.makeMove(this.selectedSquare, squareId);
             this.clearSelection();
-        } else if (square.querySelector('.chess-piece')) {
-            // Select piece
-            this.selectSquare(square);
+        } else {
+            // Select piece if there's one on this square
+            const piece = square.querySelector('.chess-piece');
+            if (piece) {
+                this.selectSquare(square);
+            }
         }
+    }
+    
+    handlePieceClick(e) {
+        const piece = e.target;
+        const square = piece.closest('.chess-square');
+        this.selectSquare(square);
     }
     
     selectSquare(square) {
@@ -47,33 +56,67 @@ class ChessBoard {
         square.classList.add('selected');
         this.selectedSquare = square.dataset.square;
         
-        // Highlight possible moves (basic implementation)
-        this.highlightPossibleMoves(square);
+        // Show possible moves
+        this.highlightValidMoves(square);
+        
+        console.log(`🎯 Selected piece at ${this.selectedSquare}`);
     }
     
     clearSelection() {
         document.querySelectorAll('.chess-square').forEach(sq => {
-            sq.classList.remove('selected', 'valid-move');
+            sq.classList.remove('selected', 'valid-move', 'capture-move');
         });
         this.selectedSquare = null;
     }
     
-    highlightPossibleMoves(square) {
-        // Basic move highlighting - will enhance with proper chess rules
-        const row = parseInt(square.dataset.row);
-        const col = parseInt(square.dataset.col);
+    highlightValidMoves(square) {
+        const piece = square.querySelector('.chess-piece');
+        if (!piece) return;
         
-        // Highlight adjacent squares for now
-        for (let r = Math.max(0, row-1); r <= Math.min(7, row+1); r++) {
-            for (let c = Math.max(0, col-1); c <= Math.min(7, col+1); c++) {
-                if (r !== row || c !== col) {
-                    const targetSquare = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
-                    if (targetSquare) {
+        const pieceType = piece.dataset.piece || piece.textContent;
+        const [col, row] = [square.dataset.square.charCodeAt(0) - 97, parseInt(square.dataset.square[1]) - 1];
+        
+        // Basic move highlighting - will enhance with proper rules
+        const moves = this.getPossibleMoves(pieceType, col, row);
+        
+        moves.forEach(([newCol, newRow]) => {
+            if (newCol >= 0 && newCol < 8 && newRow >= 0 && newRow < 8) {
+                const targetSquare = document.querySelector(`[data-square="${String.fromCharCode(97 + newCol)}${newRow + 1}"]`);
+                if (targetSquare) {
+                    const targetPiece = targetSquare.querySelector('.chess-piece');
+                    if (targetPiece) {
+                        targetSquare.classList.add('capture-move');
+                    } else {
                         targetSquare.classList.add('valid-move');
                     }
                 }
             }
+        });
+    }
+    
+    getPossibleMoves(piece, col, row) {
+        // Basic movement patterns - will expand for each piece type
+        const moves = [];
+        
+        if (piece.includes('♟') || piece.includes('♙')) { // Pawn
+            moves.push([col, row + 1], [col, row - 1]); // Basic forward/back
+        } else if (piece.includes('♜') || piece.includes('♖')) { // Rook/Boat
+            // Rook moves (horizontal/vertical)
+            for (let i = 1; i < 8; i++) {
+                moves.push([col + i, row], [col - i, row], [col, row + i], [col, row - i]);
+            }
+        } else if (piece.includes('♞') || piece.includes('♘')) { // Knight/Horse
+            // Knight L-shaped moves
+            moves.push(
+                [col + 2, row + 1], [col + 2, row - 1],
+                [col - 2, row + 1], [col - 2, row - 1],
+                [col + 1, row + 2], [col + 1, row - 2],
+                [col - 1, row + 2], [col - 1, row - 2]
+            );
         }
+        // Add more piece types...
+        
+        return moves;
     }
     
     makeMove(fromSquare, toSquare) {
@@ -88,74 +131,37 @@ class ChessBoard {
                 data: {
                     from: fromSquare,
                     to: toSquare,
-                    piece: 'unknown', // Will determine from board
-                    player: 'player1' // Will get from game state
+                    variant: this.gameVariant,
+                    player: 'player1'
                 }
             }));
         }
-    }
-    
-    handleDragStart(e) {
-        const piece = e.target;
-        const square = piece.closest('.chess-square');
-        this.selectSquare(square);
-        piece.classList.add('dragging');
-    }
-    
-    handleDragEnd(e) {
-        e.target.classList.remove('dragging');
-        this.clearSelection();
-    }
-    
-    handleDragOver(e) {
-        e.preventDefault();
-    }
-    
-    handleDrop(e) {
-        e.preventDefault();
-        const toSquare = e.currentTarget.dataset.square;
-        if (this.selectedSquare) {
-            this.makeMove(this.selectedSquare, toSquare);
-        }
-    }
-    
-    updateBoard(gameState) {
-        console.log('📋 Updating board with game state:', gameState);
-        // Update board display based on game state
-        if (gameState.current_player) {
-            this.currentPlayer = gameState.current_player;
-            this.updateCurrentPlayerDisplay();
-        }
         
-        if (gameState.scores) {
-            this.updateScores(gameState.scores);
-        }
+        // Visual feedback
+        this.showMoveAnimation(fromSquare, toSquare);
     }
     
-    updateCurrentPlayerDisplay() {
-        const currentPlayerElement = document.getElementById('current-player');
-        if (currentPlayerElement) {
-            currentPlayerElement.textContent = this.currentPlayer.charAt(0).toUpperCase() + this.currentPlayer.slice(1);
-            currentPlayerElement.style.color = `var(--player-${this.currentPlayer})`;
+    showMoveAnimation(from, to) {
+        const fromSquare = document.querySelector(`[data-square="${from}"]`);
+        const toSquare = document.querySelector(`[data-square="${to}"]`);
+        
+        if (fromSquare && toSquare) {
+            toSquare.classList.add('last-move');
+            fromSquare.classList.add('last-move');
+            
+            setTimeout(() => {
+                fromSquare.classList.remove('last-move');
+                toSquare.classList.remove('last-move');
+            }, 2000);
         }
-    }
-    
-    updateScores(scores) {
-        Object.keys(scores).forEach(color => {
-            const scoreElement = document.getElementById(`${color}-score`);
-            if (scoreElement) {
-                scoreElement.textContent = scores[color];
-            }
-        });
     }
 }
 
-// Initialize board when DOM is loaded
+// Initialize enhanced board
 document.addEventListener('DOMContentLoaded', function() {
     const gameContainer = document.getElementById('game-container');
     if (gameContainer) {
-        const gameId = new URLSearchParams(window.location.search).get('game_id') || 
-                      window.location.pathname.split('/').pop();
+        const gameId = window.location.pathname.split('/').pop();
         window.chessBoard = new ChessBoard(gameId);
     }
 });
