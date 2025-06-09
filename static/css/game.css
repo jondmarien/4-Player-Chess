@@ -4,424 +4,368 @@
 ======================================== */
 @import url('chess-merida.css');
 
+/* ========================================
+   1. GLOBAL ROOT VARIABLES & BASE STYLES
+======================================== */
 :root {
-    /* Dark Mode (Default) - your hacker theme */
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #1a1a1a;
-    --bg-tertiary: #2a2a2a;
-    --bg-quaternary: #3a3a3a;
-    
-    --text-primary: #00ff41;
-    --text-secondary: #e0e0e0;
-    --text-tertiary: #a0a0a0;
-    
-    --accent-primary: #00ff41;
-    --accent-secondary: #00d4ff;
-    --accent-danger: #ff0040;
-    --accent-warning: #ffff00;
-    --accent-purple: #bf40ff;
-    
-    --border-primary: #00ff41;
-    --border-secondary: #2a2a2a;
-    --border-subtle: #3a3a3a;
-    
-    --shadow-glow: 0 0 10px var(--accent-primary), 0 0 20px var(--accent-primary);
-    
-    /* Component-specific variables */
-    --input-bg: rgba(26, 26, 26, 0.9);
-    --input-border: #2a2a2a;
-    --input-text: #00ff41;
-    --input-placeholder: #a0a0a0;
-    
-    --card-bg: rgba(42, 42, 42, 0.9);
-    --card-border: #2a2a2a;
-    --card-text: #e0e0e0;
-    
-    /* Theme indicator */
-    --theme-mode: "dark";
-    
-    /* Cybersecurity Color Palette */
-    --cyber-black: #0a0a0a;
-    --cyber-dark: #1a1a1a;
-    --cyber-gray: #2a2a2a;
-    --cyber-light-gray: #3a3a3a;
-    --cyber-green: #00ff41;
-    --cyber-blue: #00d4ff;
-    --cyber-red: #ff0040;
-    --cyber-yellow: #ffff00;
-    --cyber-purple: #bf40ff;
-    --cyber-orange: #ff8c00;
-    
-    /* Chess Colors */
-    --player-red: #ff4444;
-    --player-blue: #4488ff;
-    --player-yellow: #ffdd44;
-    --player-green: #44ff88;
-    
-    /* Terminal Fonts */
-    --font-mono: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
-    --font-display: 'Orbitron', 'Rajdhani', sans-serif;
-    
-    /* Sizes */
-    --board-size: min(80vh, 80vw);
-    --square-size: calc(var(--board-size) / 8);
-    
-    /* Effects */
-    --glow-cyber: 0 0 10px var(--cyber-green), 0 0 20px var(--cyber-green), 0 0 30px var(--cyber-green);
-    --glow-red: 0 0 10px var(--player-red);
-    --glow-blue: 0 0 10px var(--player-blue);
-    --glow-yellow: 0 0 10px var(--player-yellow);
-    --glow-green: 0 0 10px var(--player-green);
-
-    /* New variables for piece colors */
-    --piece-yellow: #ffd700;
-    --piece-blue: #00bfff;
-    --piece-red: #ff4444;
-    --piece-green: #32cd32;
-    --piece-black: #e0e0e0;
-
-    /* Add to :root */
-    --territory-yellow: #ffd700;
-    --territory-blue: #00bfff;
-    --territory-red: #ff4444;
-    --territory-green: #32cd32;
-
-    /* Add to :root for dark mode */
-    --piece-white: #fff;
+  /* Color variables */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --bg-quaternary: #3a3a3a;
+  --text-primary: #00ff41;
+  --text-secondary: #e0e0e0;
+  --text-tertiary: #a0a0a0;
+  --accent-primary: #00ff41;
+  --accent-secondary: #00d4ff;
+  --accent-danger: #ff0040;
+  --accent-warning: #ffff00;
+  --accent-purple: #bf40ff;
+  --border-primary: #00ff41;
+  --border-secondary: #2a2a2a;
+  --border-subtle: #3a3a3a;
+  --shadow-glow: 0 0 10px var(--accent-primary), 0 0 20px var(--accent-primary);
+  --input-bg: rgba(26, 26, 26, 0.9);
+  --input-border: #2a2a2a;
+  --input-text: #00ff41;
+  --input-placeholder: #a0a0a0;
+  --card-bg: rgba(42, 42, 42, 0.9);
+  --card-border: #2a2a2a;
+  --card-text: #e0e0e0;
+  --theme-mode: "dark";
+  --cyber-black: #0a0a0a;
+  --cyber-dark: #1a1a1a;
+  --cyber-gray: #2a2a2a;
+  --cyber-light-gray: #3a3a3a;
+  --cyber-green: #00ff41;
+  --cyber-blue: #00d4ff;
+  --cyber-red: #ff0040;
+  --cyber-yellow: #ffff00;
+  --cyber-purple: #bf40ff;
+  --cyber-orange: #ff8c00;
+  --player-red: #ff4444;
+  --player-blue: #4488ff;
+  --player-yellow: #ffdd44;
+  --player-green: #44ff88;
+  --font-mono: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+  --font-display: 'Orbitron', 'Rajdhani', sans-serif;
+  --board-size: min(80vh, 80vw);
+  --square-size: calc(var(--board-size) / 8);
+  --glow-cyber: 0 0 10px var(--cyber-green), 0 0 20px var(--cyber-green), 0 0 30px var(--cyber-green);
+  --glow-red: 0 0 10px var(--player-red);
+  --glow-blue: 0 0 10px var(--player-blue);
+  --glow-yellow: 0 0 10px var(--player-yellow);
+  --glow-green: 0 0 10px var(--player-green);
+  --piece-yellow: #ffd700;
+  --piece-blue: #00bfff;
+  --piece-red: #ff4444;
+  --piece-green: #32cd32;
+  --piece-black: #e0e0e0;
+  --piece-white: #fff;
+  --territory-yellow: #ffd700;
+  --territory-blue: #00bfff;
+  --territory-red: #ff4444;
+  --territory-green: #32cd32;
+  --board-light: #2a2a2a;
+  --board-dark: #1a1a1a;
 }
-  
-  /* FIXED Light Mode - Off-White Background & Brighter Blue */
-  :root[data-theme="light"] {
-    /* Off-white backgrounds - easier on eyes than pure white */
-    --bg-primary: #fefefe;          /* Off-white instead of pure white */
-    --bg-secondary: #f8fafe;        /* Very light blue-tinted background */
-    --bg-tertiary: #f1f5f9;         /* Light slate background */
-    --bg-quaternary: #e2e8f0;       /* Medium slate background */
-    
-    /* High contrast text - much more readable */
-    --text-primary: #1e293b;        /* Dark slate instead of pure black */
-    --text-secondary: #475569;      /* Medium slate for secondary text */
-    --text-tertiary: #64748b;       /* Lighter slate for tertiary text */
-    
-    /* Brighter, more accessible blue accent colors */
-    --accent-primary: #3b82f6;      /* Bright blue - great contrast on off-white */
-    --accent-secondary: #2563eb;    /* Slightly darker blue for variety */
-    --accent-danger: #ef4444;       /* Bright red */
-    --accent-warning: #f59e0b;      /* Bright amber */
-    --accent-purple: #8b5cf6;       /* Bright purple */
-    
-    --border-primary: #3b82f6;      /* Bright blue borders */
-    --border-secondary: #e2e8f0;    /* Light borders */
-    --border-subtle: #cbd5e1;       /* Subtle borders */
-    
-    --shadow-glow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
-    
-    /* FIXED: Light mode component variables */
-    --input-bg: #ffffff;            /* Pure white for form inputs */
-    --input-border: #cbd5e1;        /* Light border for inputs */
-    --input-text: #1e293b;          /* Dark text for inputs */
-    --input-placeholder: #94a3b8;   /* Medium gray for placeholders */
-    
-    --card-bg: #ffffff;             /* White card backgrounds */
-    --card-border: #e2e8f0;         /* Light card borders */
-    --card-text: #1e293b;           /* Dark card text */
 
-    /* New variables for piece colors */
-    --piece-yellow: #ca8a04;
-    --piece-blue: #2563eb;
-    --piece-red: #dc2626;
-    --piece-green: #059669;
-    --piece-black: #374151;
+:root[data-theme="light"] {
+  --board-light: #f0d9b5;
+  --board-dark: #b58863;
+  --piece-yellow: #ca8a04;
+  --piece-blue: #2563eb;
+  --piece-red: #dc2626;
+  --piece-green: #059669;
+  --piece-black: #374151;
+  --territory-yellow: #fbbf24;
+  --territory-blue: #3b82f6;
+  --territory-red: #ef4444;
+  --territory-green: #22c55e;
+}
 
-    /* Add to :root[data-theme="light"] */
-    --territory-yellow: #fbbf24;
-    --territory-blue: #3b82f6;
-    --territory-red: #ef4444;
-    --territory-green: #22c55e;
-  }
-  
-  /* ========================================
-     Base Styling & Typography
-  ======================================== */
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-    color: var(--text-primary);
-    font-family: var(--font-mono);
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
-    transition: all 0.3s ease;
-  }
-  
-  /* Scrollbar Styling */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: var(--accent-primary);
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-secondary);
-  }
-  
-  /* ========================================
-     ASCII Art & Headers
-  ======================================== */
-  
-  .ascii-header {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    line-height: 1;
-    color: var(--accent-primary);
-    text-shadow: var(--shadow-glow);
-    text-align: center;
-    margin: 20px 0;
-    white-space: pre;
-  }
-  
-  .app-title {
-    font-family: var(--font-display);
-    font-size: 3rem;
-    font-weight: 700;
-    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-align: center;
-    margin: 20px 0;
-    text-shadow: var(--shadow-glow);
-  }
-  
-  .subtitle {
-    color: var(--text-tertiary);
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-  }
-  
-  /* ========================================
-     Navigation & Header
-  ======================================== */
-  
-  .cyber-nav {
-    background: rgba(var(--bg-secondary-rgb, 26, 26, 26), 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--accent-primary);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-  }
-  
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--accent-primary);
-    text-decoration: none;
-    text-shadow: var(--shadow-glow);
-  }
-  
-  .nav-links {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-  }
-  
-  .nav-links li:first-child a {
-    margin-left: 30px;
-  }
-  
-  .nav-links a {
-    color: var(--text-tertiary);
-    text-decoration: none;
-    padding: 10px 15px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    font-family: var(--font-mono);
-  }
-  
-  .nav-links a:hover {
-    color: var(--accent-primary);
-    border-color: var(--accent-primary);
-    box-shadow: var(--shadow-glow);
-  }
-  
-  /* ========================================
-     Game Layout & Structure
-  ======================================== */
-  
-  .game-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: auto 1fr auto;
-    gap: 20px;
-    min-height: calc(100vh - 100px);
-  }
-  
-  .game-header {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 20px;
-    background: rgba(var(--bg-secondary-rgb, 42, 42, 42), 0.5);
-    border: 1px solid var(--accent-primary);
-    border-radius: 8px;
-    box-shadow: var(--shadow-glow);
-  }
-  
-  .game-board-container {
-    grid-column: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .player-info-left {
-    grid-column: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .player-info-right {
-    grid-column: 3;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .game-footer {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: rgba(var(--bg-secondary-rgb, 42), 0.5);
-    border: 1px solid var(--accent-primary);
-    border-radius: 8px;
-  }
-  
-  /* ========================================
-     4-Player Chess Board
-  ======================================== */
-  
-  .chess-board {
-    width: var(--board-size);
-    height: var(--board-size);
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    border: 2px solid var(--accent-primary);
-    box-shadow: var(--shadow-glow);
-    position: relative;
-    background: var(--bg-secondary);
-  }
-  
-  .chess-square {
-    width: var(--square-size);
-    height: var(--square-size);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .chess-square.light {
-    background: var(--board-light);
-  }
-  
-  .chess-square.dark {
-    background: var(--board-dark);
-  }
-  
-  .chess-square:hover {
-    background-color: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2) !important;
-    box-shadow: inset 0 0 15px var(--accent-primary);
-  }
-  
-  .chess-square.selected {
-    background: rgba(0, 212, 255, 0.3) !important;
-    box-shadow: inset 0 0 15px var(--accent-secondary);
-    border: 2px solid var(--accent-secondary);
-  }
-  
-  .chess-square.valid-move {
-    background: rgba(255, 255, 0, 0.2) !important;
-    box-shadow: inset 0 0 10px var(--accent-warning);
-  }
-  
-  .chess-square.last-move {
-    background: rgba(255, 140, 0, 0.3) !important;
-    box-shadow: inset 0 0 10px var(--accent-orange);
-  }
-  
-  /* ========================================
-     Chess Pieces
-  ======================================== */
-  
-  .chess-piece {
-    font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
-    font-size: 2.5rem;
-    cursor: grab;
-    user-select: none;
-    transition: all 0.2s ease;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
-    z-index: 10;
-  }
-  
-  .chess-piece:hover {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 10px currentColor);
-  }
-  
-  .chess-piece:active {
-    cursor: grabbing;
-    transform: scale(0.95);
-  }
-  
-  .chess-piece.dragging {
-    transform: scale(1.2);
-    z-index: 1000;
-    pointer-events: none;
-  }
+.light-square { background: var(--board-light) !important; }
+.dark-square { background: var(--board-dark) !important; }
 
-  /* ========================================
-    Authentic Chaturaji Board Styling
+/* ========== BASE STYLES (applies to all themes) ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* ========================================
+   ASCII Art & Headers
+======================================== */
+
+.ascii-header {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--accent-primary);
+  text-shadow: var(--shadow-glow);
+  text-align: center;
+  margin: 20px 0;
+  white-space: pre;
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 20px 0;
+  text-shadow: var(--shadow-glow);
+}
+
+.subtitle {
+  color: var(--text-tertiary);
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* ========================================
+   Navigation & Header
+======================================== */
+
+.cyber-nav {
+  background: rgba(var(--bg-secondary-rgb, 26, 26, 26), 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--accent-primary);
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-primary);
+  text-decoration: none;
+  text-shadow: var(--shadow-glow);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links li:first-child a {
+  margin-left: 30px;
+}
+
+.nav-links a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-family: var(--font-mono);
+}
+
+.nav-links a:hover {
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ========================================
+   Game Layout & Structure
+======================================== */
+
+.game-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+  min-height: calc(100vh - 100px);
+}
+
+.game-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 20px;
+  background: rgba(var(--bg-secondary-rgb, 42, 42, 42), 0.5);
+  border: 1px solid var(--accent-primary);
+  border-radius: 8px;
+  box-shadow: var(--shadow-glow);
+}
+
+.game-board-container {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-info-left {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.player-info-right {
+  grid-column: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(var(--bg-secondary-rgb, 42), 0.5);
+  border: 1px solid var(--accent-primary);
+  border-radius: 8px;
+}
+
+/* ========================================
+   4-Player Chess Board
+======================================== */
+
+.chess-board {
+  width: var(--board-size);
+  height: var(--board-size);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border: 2px solid var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+  position: relative;
+  background: var(--bg-secondary);
+}
+
+.chess-square {
+  width: var(--square-size);
+  height: var(--square-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chess-square.light {
+  background: var(--board-light);
+}
+
+.chess-square.dark {
+  background: var(--board-dark);
+}
+
+.chess-square:hover {
+  background-color: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2) !important;
+  box-shadow: inset 0 0 15px var(--accent-primary);
+}
+
+.chess-square.selected {
+  background: rgba(0, 212, 255, 0.3) !important;
+  box-shadow: inset 0 0 15px var(--accent-secondary);
+  border: 2px solid var(--accent-secondary);
+}
+
+.chess-square.valid-move {
+  background: rgba(255, 255, 0, 0.2) !important;
+  box-shadow: inset 0 0 10px var(--accent-warning);
+}
+
+.chess-square.last-move {
+  background: rgba(255, 140, 0, 0.3) !important;
+  box-shadow: inset 0 0 10px var(--accent-orange);
+}
+
+/* ========================================
+   Chess Pieces
+======================================== */
+
+.chess-piece {
+  font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
+  font-size: 2.5rem;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.2s ease;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+  z-index: 10;
+}
+
+.chess-piece:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.chess-piece:active {
+  cursor: grabbing;
+  transform: scale(0.95);
+}
+
+.chess-piece.dragging {
+  transform: scale(1.2);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* ========================================
+   Authentic Chaturaji Board Styling
 ======================================== */
 
 .chaturaji-board .chess-square {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Corner highlighting for Chaturaji */
@@ -433,7 +377,7 @@
 .chaturaji-board .chess-square[data-row="1"][data-col="1"],
 .chaturaji-board .chess-square[data-row="1"][data-col="2"],
 .chaturaji-board .chess-square[data-row="1"][data-col="3"] {
-    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
+  box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* ========================================
@@ -441,32 +385,32 @@
 ======================================== */
 
 .enochian-board .throne-square {
-    background: radial-gradient(circle, rgba(191, 64, 255, 0.6), transparent 70%);
-    border: 3px solid var(--accent-purple) !important;
-    box-shadow: 
-        inset 0 0 15px rgba(191, 64, 255, 0.8),
-        0 0 20px rgba(191, 64, 255, 0.6);
-    position: relative;
-    z-index: 10;
-    transform: scale(1.05);
+  background: radial-gradient(circle, rgba(191, 64, 255, 0.6), transparent 70%);
+  border: 3px solid var(--accent-purple) !important;
+  box-shadow: 
+      inset 0 0 15px rgba(191, 64, 255, 0.8),
+      0 0 20px rgba(191, 64, 255, 0.6);
+  position: relative;
+  z-index: 10;
+  transform: scale(1.05);
 }
 
 .enochian-board .throne-square::before {
-    content: '👑';
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    font-size: 1rem;
-    opacity: 0.8;
-    z-index: 15;
-    filter: drop-shadow(0 0 5px var(--accent-purple));
+  content: '👑';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 1rem;
+  opacity: 0.8;
+  z-index: 15;
+  filter: drop-shadow(0 0 5px var(--accent-purple));
 }
 
 .throne-pieces {
-    font-size: 2.2rem;
-    letter-spacing: -6px;
-    text-shadow: 0 0 20px currentColor;
-    filter: drop-shadow(0 0 10px currentColor);
+  font-size: 2.2rem;
+  letter-spacing: -6px;
+  text-shadow: 0 0 20px currentColor;
+  filter: drop-shadow(0 0 10px currentColor);
 }
 
 /* Enhanced piece colors for better visibility */
@@ -475,447 +419,447 @@
 .piece-red { text-shadow: 0 0 15px var(--piece-red), 0 0 25px var(--piece-red), 2px 2px 4px rgba(0,0,0,0.8); }
 .piece-green { text-shadow: 0 0 15px var(--piece-green), 0 0 25px var(--piece-green), 2px 2px 4px rgba(0,0,0,0.8); }
 .piece-black { text-shadow: 0 0 15px var(--piece-black), 0 0 25px var(--piece-black), 2px 2px 4px rgba(0,0,0,0.8); }
-  
-  /* ========================================
-     Player Information Panels
-  ======================================== */
-  
-  .player-panel {
-    background: rgba(var(--bg-secondary-rgb, 42), 0.8);
-    border: 1px solid var(--bg-tertiary);
-    border-radius: 8px;
-    padding: 20px;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
+
+/* ========================================
+   Player Information Panels
+======================================== */
+
+.player-panel {
+  background: rgba(var(--bg-secondary-rgb, 42), 0.8);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 8px;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.player-panel.active {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+  background: rgba(var(--bg-secondary-rgb, 42), 0.95);
+}
+
+.player-panel.red { border-left: 4px solid var(--player-red); }
+.player-panel.blue { border-left: 4px solid var(--player-blue); }
+.player-panel.yellow { border-left: 4px solid var(--player-yellow); }
+.player-panel.green { border-left: 4px solid var(--player-green); }
+
+.player-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--accent-primary);
+}
+
+.player-score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+  font-family: var(--font-mono);
+}
+
+.player-status {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  margin-top: 10px;
+}
+
+.connection-status {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.connection-status.connected { background: var(--accent-primary); box-shadow: var(--shadow-glow); }
+.connection-status.disconnected { background: var(--accent-danger); }
+
+/* ========================================
+   Move History & Game Info
+======================================== */
+
+.move-history {
+  background: rgba(var(--bg-secondary-rgb, 26), 0.9);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 8px;
+  padding: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.move-history h4 {
+  color: var(--accent-primary);
+  margin-bottom: 15px;
+  font-family: var(--font-display);
+}
+
+.move-item {
+  padding: 8px 12px;
+  margin: 5px 0;
+  background: rgba(var(--bg-secondary-rgb, 58), 0.5);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.move-item:nth-child(even) {
+  background: rgba(var(--bg-secondary-rgb, 58), 0.7);
+}
+
+.move-player {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.move-notation {
+  color: var(--text-tertiary);
+}
+
+/* ========================================
+   Game Controls & Buttons
+======================================== */
+
+.cyber-button {
+  background: linear-gradient(45deg, var(--bg-secondary), var(--bg-tertiary));
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.cyber-button:hover {
+  background: linear-gradient(45deg, var(--bg-tertiary), var(--bg-quaternary));
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.cyber-button:active {
+  transform: translateY(0);
+}
+
+.cyber-button.primary {
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--bg-primary);
+  border-color: var(--accent-secondary);
+}
+
+.cyber-button.danger {
+  background: linear-gradient(45deg, var(--accent-danger), #ff6666);
+  color: white;
+  border-color: var(--accent-danger);
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+/* ========================================
+   Status Messages & Alerts
+======================================== */
+
+.status-bar {
+  background: var(--bg-primary);
+  color: var(--accent-primary);
+  padding: 15px;
+  border: 1px solid var(--accent-primary);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.websocket-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ws-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.ws-indicator.connected {
+  background: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.ws-indicator.disconnected {
+  background: var(--accent-danger);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.alert {
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin: 10px 0;
+  border-left: 4px solid;
+  font-family: var(--font-mono);
+}
+
+.alert.success {
+  background: rgba(0, 255, 65, 0.1);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.alert.error {
+  background: rgba(255, 0, 64, 0.1);
+  border-color: var(--accent-danger);
+  color: var(--accent-danger);
+}
+
+.alert.warning {
+  background: rgba(255, 255, 0, 0.1);
+  border-color: var(--accent-warning);
+  color: var(--accent-warning);
+}
+
+/* ========================================
+   Loading & Animations
+======================================== */
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--bg-tertiary);
+  border-top: 3px solid var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+   Responsive Design
+======================================== */
+
+@media (max-width: 1200px) {
+  .game-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 15px;
   }
   
-  .player-panel.active {
-    border-color: var(--accent-primary);
-    box-shadow: var(--shadow-glow);
-    background: rgba(var(--bg-secondary-rgb, 42), 0.95);
+  .game-board-container {
+    grid-column: 1;
+    grid-row: 2;
   }
   
-  .player-panel.red { border-left: 4px solid var(--player-red); }
-  .player-panel.blue { border-left: 4px solid var(--player-blue); }
-  .player-panel.yellow { border-left: 4px solid var(--player-yellow); }
-  .player-panel.green { border-left: 4px solid var(--player-green); }
-  
-  .player-name {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--accent-primary);
+  .player-info-left,
+  .player-info-right {
+    grid-column: 1;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
   }
   
-  .player-score {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 10px 0;
-    font-family: var(--font-mono);
+  :root {
+    --board-size: min(70vh, 90vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 2rem;
   }
   
-  .player-status {
-    font-size: 0.9rem;
-    color: var(--text-tertiary);
-    margin-top: 10px;
+  .chess-piece {
+    font-size: 2rem;
   }
   
-  .connection-status {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 8px;
+  :root {
+    --board-size: min(60vh, 95vw);
   }
   
-  .connection-status.connected { background: var(--accent-primary); box-shadow: var(--shadow-glow); }
-  .connection-status.disconnected { background: var(--accent-danger); }
-  
-  /* ========================================
-     Move History & Game Info
-  ======================================== */
-  
-  .move-history {
-    background: rgba(var(--bg-secondary-rgb, 26), 0.9);
-    border: 1px solid var(--bg-tertiary);
-    border-radius: 8px;
-    padding: 20px;
-    max-height: 300px;
-    overflow-y: auto;
+  .nav-container {
+    flex-direction: column;
+    gap: 15px;
   }
   
-  .move-history h4 {
-    color: var(--accent-primary);
-    margin-bottom: 15px;
-    font-family: var(--font-display);
+  .player-info-left,
+  .player-info-right {
+    grid-template-columns: 1fr;
   }
-  
-  .move-item {
-    padding: 8px 12px;
-    margin: 5px 0;
-    background: rgba(var(--bg-secondary-rgb, 58), 0.5);
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .move-item:nth-child(even) {
-    background: rgba(var(--bg-secondary-rgb, 58), 0.7);
-  }
-  
-  .move-player {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .move-notation {
-    color: var(--text-tertiary);
-  }
-  
-  /* ========================================
-     Game Controls & Buttons
-  ======================================== */
-  
-  .cyber-button {
-    background: linear-gradient(45deg, var(--bg-secondary), var(--bg-tertiary));
-    color: var(--accent-primary);
-    border: 1px solid var(--accent-primary);
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-  }
-  
-  .cyber-button:hover {
-    background: linear-gradient(45deg, var(--bg-tertiary), var(--bg-quaternary));
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
-  }
-  
-  .cyber-button:active {
-    transform: translateY(0);
-  }
-  
-  .cyber-button.primary {
-    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
-    color: var(--bg-primary);
-    border-color: var(--accent-secondary);
-  }
-  
-  .cyber-button.danger {
-    background: linear-gradient(45deg, var(--accent-danger), #ff6666);
-    color: white;
-    border-color: var(--accent-danger);
-  }
-  
-  .button-group {
-    display: flex;
-    gap: 10px;
-    margin: 20px 0;
-  }
-  
-  /* ========================================
-     Status Messages & Alerts
-  ======================================== */
-  
-  .status-bar {
-    background: var(--bg-primary);
-    color: var(--accent-primary);
-    padding: 15px;
-    border: 1px solid var(--accent-primary);
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    margin: 20px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .websocket-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .ws-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  
-  .ws-indicator.connected {
-    background: var(--accent-primary);
-    box-shadow: var(--shadow-glow);
-  }
-  
-  .ws-indicator.disconnected {
-    background: var(--accent-danger);
-  }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  
-  .alert {
-    padding: 15px 20px;
-    border-radius: 4px;
-    margin: 10px 0;
-    border-left: 4px solid;
-    font-family: var(--font-mono);
-  }
-  
-  .alert.success {
-    background: rgba(0, 255, 65, 0.1);
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
-  }
-  
-  .alert.error {
-    background: rgba(255, 0, 64, 0.1);
-    border-color: var(--accent-danger);
-    color: var(--accent-danger);
-  }
-  
-  .alert.warning {
-    background: rgba(255, 255, 0, 0.1);
-    border-color: var(--accent-warning);
-    color: var(--accent-warning);
-  }
-  
-  /* ========================================
-     Loading & Animations
-  ======================================== */
-  
-  .loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-  }
-  
-  .loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--bg-tertiary);
-    border-top: 3px solid var(--accent-primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  /* ========================================
-     Responsive Design
-  ======================================== */
-  
-  @media (max-width: 1200px) {
-    .game-container {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto auto;
-      gap: 15px;
-    }
-    
-    .game-board-container {
-      grid-column: 1;
-      grid-row: 2;
-    }
-    
-    .player-info-left,
-    .player-info-right {
-      grid-column: 1;
-      grid-row: 3;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-    
-    :root {
-      --board-size: min(70vh, 90vw);
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .app-title {
-      font-size: 2rem;
-    }
-    
-    .chess-piece {
-      font-size: 2rem;
-    }
-    
-    :root {
-      --board-size: min(60vh, 95vw);
-    }
-    
-    .nav-container {
-      flex-direction: column;
-      gap: 15px;
-    }
-    
-    .player-info-left,
-    .player-info-right {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  /* ========================================
-     Terminal/Console Effects
-  ======================================== */
-  
-  .terminal-text {
-    font-family: var(--font-mono);
-    background: var(--bg-primary);
-    color: var(--accent-primary);
-    padding: 15px;
-    border-radius: 4px;
-    border: 1px solid var(--accent-primary);
-    white-space: pre-wrap;
-    overflow-x: auto;
-    text-shadow: 0 0 5px var(--accent-primary);
-  }
-  
-  .cursor-blink::after {
-    content: '█';
-    animation: blink 1s infinite;
-    color: var(--accent-primary);
-  }
-  
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-  }
-  
-  /* ========================================
-     Easter Eggs & Special Effects
-  ======================================== */
-  
-  .matrix-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.05;
-    background-image: 
-      linear-gradient(90deg, var(--accent-primary) 1px, transparent 1px),
-      linear-gradient(var(--accent-primary) 1px, transparent 1px);
-    background-size: 20px 20px;
-    animation: matrix-scroll 20s linear infinite;
-    transition: opacity 0.3s ease;
-  }
-  
-  @keyframes matrix-scroll {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(20px); }
-  }
-  
-  .hacker-border {
-    position: relative;
-    border: 1px solid var(--accent-primary);
-  }
-  
-  .hacker-border::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
-    z-index: -1;
-    border-radius: inherit;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .hacker-border:hover::before {
-    opacity: 0.3;
-  }
-  
-  /* ========================================
+}
+
+/* ========================================
+   Terminal/Console Effects
+======================================== */
+
+.terminal-text {
+  font-family: var(--font-mono);
+  background: var(--bg-primary);
+  color: var(--accent-primary);
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-primary);
+  white-space: pre-wrap;
+  overflow-x: auto;
+  text-shadow: 0 0 5px var(--accent-primary);
+}
+
+.cursor-blink::after {
+  content: '█';
+  animation: blink 1s infinite;
+  color: var(--accent-primary);
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ========================================
+   Easter Eggs & Special Effects
+======================================== */
+
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.05;
+  background-image: 
+    linear-gradient(90deg, var(--accent-primary) 1px, transparent 1px),
+    linear-gradient(var(--accent-primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: matrix-scroll 20s linear infinite;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes matrix-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(20px); }
+}
+
+.hacker-border {
+  position: relative;
+  border: 1px solid var(--accent-primary);
+}
+
+.hacker-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hacker-border:hover::before {
+  opacity: 0.3;
+}
+
+/* ========================================
    Fixed Chess Board Grid
 ======================================== */
 
 .chess-board-grid {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    gap: 1px;
-    background: var(--bg-secondary);
-    border: 3px solid var(--accent-primary);
-    box-shadow: var(--shadow-glow);
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 1px;
+  background: var(--bg-secondary);
+  border: 3px solid var(--accent-primary);
+  box-shadow: var(--shadow-glow);
 }
 
 .chess-square {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-height: 50px;
-    min-width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 50px;
+  min-width: 50px;
 }
 
 .light-square {
-    background-color: var(--board-light);
+  background-color: var(--board-light);
 }
 
 .dark-square {
-    background-color: var(--board-dark);
+  background-color: var(--board-dark);
 }
 
 /* Throne squares for Enochian chess */
 .throne-square {
-    background: radial-gradient(circle, rgba(191, 64, 255, 0.4), transparent 70%);
-    border: 2px solid var(--accent-purple);
-    box-shadow: inset 0 0 20px rgba(191, 64, 255, 0.6);
+  background: radial-gradient(circle, rgba(191, 64, 255, 0.4), transparent 70%);
+  border: 2px solid var(--accent-purple);
+  box-shadow: inset 0 0 20px rgba(191, 64, 255, 0.6);
 }
 
 .throne-pieces {
-    font-size: 1.8rem;
-    letter-spacing: -8px;
-    text-shadow: 0 0 15px currentColor;
+  font-size: 1.8rem;
+  letter-spacing: -8px;
+  text-shadow: 0 0 15px currentColor;
 }
 
 /* Enhanced piece styling */
 .chess-piece {
-    font-size: 2.5rem;
-    cursor: grab;
-    user-select: none;
-    transition: all 0.2s ease;
-    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.8));
-    z-index: 10;
-    font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
+  font-size: 2.5rem;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.2s ease;
+  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.8));
+  z-index: 10;
+  font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
 }
 
 /* Enhanced piece colors for better visibility */
@@ -924,38 +868,38 @@
 .piece-red { text-shadow: 0 0 15px var(--piece-red), 0 0 25px var(--piece-red), 2px 2px 4px rgba(0,0,0,0.8); }
 .piece-green { text-shadow: 0 0 15px var(--piece-green), 0 0 25px var(--piece-green), 2px 2px 4px rgba(0,0,0,0.8); }
 .piece-black { text-shadow: 0 0 15px var(--piece-black), 0 0 25px var(--piece-black), 2px 2px 4px rgba(0,0,0,0.8); }
-  
+
 /* ========================================
    Chaturaji Corner Quadrants
 ======================================== */
 
 .chaturaji-board .corner-quadrant {
-    box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.4);
-    border: 2px solid rgba(255, 215, 0, 0.6);
+  box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.4);
+  border: 2px solid rgba(255, 215, 0, 0.6);
 }
 
 .chaturaji-board .corner-quadrant.light-square {
-    background: linear-gradient(45deg, var(--board-light), var(--territory-yellow));
+  background: linear-gradient(45deg, var(--board-light), var(--territory-yellow));
 }
 
 .chaturaji-board .corner-quadrant.dark-square {
-    background: linear-gradient(45deg, var(--board-dark), var(--territory-yellow));
+  background: linear-gradient(45deg, var(--board-dark), var(--territory-yellow));
 }
 
 .chaturaji-board .territory-yellow {
-    border: 1px solid var(--territory-yellow);
+  border: 1px solid var(--territory-yellow);
 }
 
 .chaturaji-board .territory-blue {
-    border: 1px solid var(--territory-blue);
+  border: 1px solid var(--territory-blue);
 }
 
 .chaturaji-board .territory-red {
-    border: 1px solid var(--territory-red);
+  border: 1px solid var(--territory-red);
 }
 
 .chaturaji-board .territory-green {
-    border: 1px solid var(--territory-green);
+  border: 1px solid var(--territory-green);
 }
 
 /* ========================================
@@ -963,72 +907,72 @@
 ======================================== */
 
 .enochian-board-container {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    gap: 5px;
-    width: max-content;
-    margin: 0 auto;
-    padding: 20px;
-    background: linear-gradient(45deg, var(--bg-secondary), var(--bg-tertiary));
-    border: 3px solid var(--accent-purple);
-    border-radius: 10px;
-    box-shadow: var(--shadow-glow);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 5px;
+  width: max-content;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(45deg, var(--bg-secondary), var(--bg-tertiary));
+  border: 3px solid var(--accent-purple);
+  border-radius: 10px;
+  box-shadow: var(--shadow-glow);
 }
 
 .top-extensions, .bottom-extensions {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  align-items: center;
 }
 
 .main-board-row {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 5px;
-    align-items: center;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 5px;
+  align-items: center;
 }
 
 .left-extensions, .right-extensions {
-    display: grid;
-    grid-template-rows: repeat(8, 1fr);
-    gap: 1px;
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  gap: 1px;
 }
 
 .yellow-extension, .blue-extension, .red-extension, .green-extension {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
 }
 
 .yellow-left-ext, .green-left-ext, .blue-right-ext, .red-right-ext {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    gap: 2px;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 2px;
 }
 
 .extension-square {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(var(--bg-secondary-rgb, 42), 0.8);
-    border: 1px solid var(--accent-primary);
-    cursor: pointer;
-    transition: all 0.2s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(var(--bg-secondary-rgb, 42), 0.8);
+  border: 1px solid var(--accent-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .extension-square:hover {
-    background: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2);
-    box-shadow: inset 0 0 10px var(--accent-primary);
+  background: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2);
+  box-shadow: inset 0 0 10px var(--accent-primary);
 }
 
 .central-board {
-    width: 320px;
-    height: 320px;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+  width: 320px;
+  height: 320px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
 }
 
 /* Elemental themed extensions */
@@ -1038,33 +982,33 @@
 .element-earth { border-color: var(--accent-primary); }
 
 .board-spacer {
-    width: 40px;
-    height: 40px;
-    background: transparent;
+  width: 40px;
+  height: 40px;
+  background: transparent;
 }
-  
+
 /* ========================================
    Chaturaji Territory Control Styling
 ======================================== */
 
 .chaturaji-board .territory-yellow {
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.06));
-    border: 1px solid rgba(251, 191, 36, 0.25);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.06));
+  border: 1px solid rgba(251, 191, 36, 0.25);
 }
 
 .chaturaji-board .territory-blue {
-    background: linear-gradient(135deg, rgba(0, 191, 255, 0.15), rgba(0, 191, 255, 0.05));
-    border: 1px solid rgba(0, 191, 255, 0.3);
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.15), rgba(0, 191, 255, 0.05));
+  border: 1px solid rgba(0, 191, 255, 0.3);
 }
 
 .chaturaji-board .territory-red {
-    background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05));
-    border: 1px solid rgba(255, 68, 68, 0.3);
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05));
+  border: 1px solid rgba(255, 68, 68, 0.3);
 }
 
 .chaturaji-board .territory-green {
-    background: linear-gradient(135deg, rgba(50, 205, 50, 0.15), rgba(50, 205, 50, 0.05));
-    border: 1px solid rgba(50, 205, 50, 0.3);
+  background: linear-gradient(135deg, rgba(50, 205, 50, 0.15), rgba(50, 205, 50, 0.05));
+  border: 1px solid rgba(50, 205, 50, 0.3);
 }
 
 /* ========================================
@@ -1072,17 +1016,17 @@
 ======================================== */
 
 .enochian-board .throne-area {
-    background: rgba(191, 64, 255, 0.2);
-    border: 1px solid rgba(191, 64, 255, 0.4);
+  background: rgba(191, 64, 255, 0.2);
+  border: 1px solid rgba(191, 64, 255, 0.4);
 }
 
 .enochian-board .chess-square {
-    z-index: 1;
-    position: relative;
+  z-index: 1;
+  position: relative;
 }
 
 .enochian-board .chess-square:not(.throne-square) {
-    z-index: 5;
+  z-index: 5;
 }
 
 /* Chaturaji territory highlighting */
@@ -1093,131 +1037,131 @@
 
 /* Enochian throne squares - larger as per rules */
 .enochian-board .throne-square {
-    background: radial-gradient(circle, rgba(191,64,255,0.6), transparent);
-    border: 3px solid var(--accent-purple);
-    box-shadow: 0 0 20px rgba(191,64,255,0.8);
-    position: relative;
-    transform: scale(1.1);
+  background: radial-gradient(circle, rgba(191,64,255,0.6), transparent);
+  border: 3px solid var(--accent-purple);
+  box-shadow: 0 0 20px rgba(191,64,255,0.8);
+  position: relative;
+  transform: scale(1.1);
 }
 
 .double-piece {
-    font-size: 2rem;
-    letter-spacing: -4px;
-    text-shadow: 0 0 15px currentColor;
+  font-size: 2rem;
+  letter-spacing: -4px;
+  text-shadow: 0 0 15px currentColor;
 }
-  
+
 /* ========================================
    Authentic Chaturaji L-shaped Territories  
 ======================================== */
 
 .chaturaji-board .territory-yellow {
-    background: linear-gradient(to right, rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.2));
-    border: 2px solid rgba(255, 215, 0, 0.8);
-    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
+  background: linear-gradient(to right, rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.2));
+  border: 2px solid rgba(255, 215, 0, 0.8);
+  box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .chaturaji-board .territory-blue {
-    background: linear-gradient(to bottom, rgba(0, 191, 255, 0.5), rgba(0, 191, 255, 0.2));
-    border: 2px solid rgba(0, 191, 255, 0.8);
-    box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.3);
+  background: linear-gradient(to bottom, rgba(0, 191, 255, 0.5), rgba(0, 191, 255, 0.2));
+  border: 2px solid rgba(0, 191, 255, 0.8);
+  box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.3);
 }
 
 .chaturaji-board .territory-red {
-    background: linear-gradient(to right, rgba(255, 68, 68, 0.5), rgba(255, 68, 68, 0.2));
-    border: 2px solid rgba(255, 68, 68, 0.8);
-    box-shadow: inset 0 0 10px rgba(255, 68, 68, 0.3);
+  background: linear-gradient(to right, rgba(255, 68, 68, 0.5), rgba(255, 68, 68, 0.2));
+  border: 2px solid rgba(255, 68, 68, 0.8);
+  box-shadow: inset 0 0 10px rgba(255, 68, 68, 0.3);
 }
 
 .chaturaji-board .territory-green {
-    background: linear-gradient(to top, rgba(50, 205, 50, 0.5), rgba(50, 205, 50, 0.2));
-    border: 2px solid rgba(50, 205, 50, 0.8);
-    box-shadow: inset 0 0 10px rgba(50, 205, 50, 0.3);
+  background: linear-gradient(to top, rgba(50, 205, 50, 0.5), rgba(50, 205, 50, 0.2));
+  border: 2px solid rgba(50, 205, 50, 0.8);
+  box-shadow: inset 0 0 10px rgba(50, 205, 50, 0.3);
 }
 
 /* Directional indicators for piece orientations */
 .chaturaji-board .territory-blue::before {
-    content: "↓";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    color: rgba(0, 191, 255, 0.8);
+  content: "↓";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  color: rgba(0, 191, 255, 0.8);
 }
 
 .chaturaji-board .territory-yellow::before {
-    content: "→";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    color: rgba(255, 215, 0, 0.8);
+  content: "→";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  color: rgba(255, 215, 0, 0.8);
 }
 
 .chaturaji-board .territory-red::before {
-    content: "→";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    color: rgba(255, 68, 68, 0.8);
+  content: "→";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  color: rgba(255, 68, 68, 0.8);
 }
 
 .chaturaji-board .territory-green::before {
-    content: "↑";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    color: rgba(50, 205, 50, 0.8);
+  content: "↑";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  color: rgba(50, 205, 50, 0.8);
 }
 
 /* Clear visual separation between territories */
 .chaturaji-board .chess-square {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
 }
-  
+
 /* ========================================
    Fixed Enochian Throne Square Borders
 ======================================== */
 
 .enochian-board .throne-square {
-    background: radial-gradient(circle, rgba(191, 64, 255, 0.6), transparent 70%);
-    border: 3px solid var(--accent-purple) !important;
-    box-shadow: 
-        inset 0 0 15px rgba(191, 64, 255, 0.8),
-        0 0 20px rgba(191, 64, 255, 0.6);
-    position: relative;
-    z-index: 10;
-    transform: scale(1.05);
+  background: radial-gradient(circle, rgba(191, 64, 255, 0.6), transparent 70%);
+  border: 3px solid var(--accent-purple) !important;
+  box-shadow: 
+      inset 0 0 15px rgba(191, 64, 255, 0.8),
+      0 0 20px rgba(191, 64, 255, 0.6);
+  position: relative;
+  z-index: 10;
+  transform: scale(1.05);
 }
 
 .enochian-board .throne-square::before {
-    content: '👑';
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    font-size: 1rem;
-    opacity: 0.8;
-    z-index: 15;
-    filter: drop-shadow(0 0 5px var(--accent-purple));
+  content: '👑';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 1rem;
+  opacity: 0.8;
+  z-index: 15;
+  filter: drop-shadow(0 0 5px var(--accent-purple));
 }
 
 /* Ensure adjacent squares don't overlap throne borders */
 .enochian-board .chess-square {
-    z-index: 1;
-    position: relative;
+  z-index: 1;
+  position: relative;
 }
 
 .enochian-board .chess-square:not(.throne-square) {
-    z-index: 5;
+  z-index: 5;
 }
-  
+
 /* ========================================
    Readable Chaturaji Territory Styling
 ======================================== */
@@ -1233,55 +1177,55 @@
 
 /* Enhanced piece visibility on darker backgrounds */
 .chess-piece {
-    font-size: 2.8rem;
-    cursor: grab;
-    user-select: none;
-    transition: all 0.2s ease;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
-    z-index: 10;
-    font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
+  font-size: 2.8rem;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.2s ease;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+  z-index: 10;
+  font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
 }
 
 .chess-piece:hover {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 15px currentColor);
-    z-index: 20;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 15px currentColor);
+  z-index: 20;
 }
 
 /* Better square hover effects */
 .chess-square:hover {
-    background-color: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2) !important;
-    box-shadow: inset 0 0 15px rgba(var(--accent-primary-rgb, 0, 255, 65), 0.4);
-    cursor: pointer;
+  background-color: rgba(var(--accent-primary-rgb, 0, 255, 65), 0.2) !important;
+  box-shadow: inset 0 0 15px rgba(var(--accent-primary-rgb, 0, 255, 65), 0.4);
+  cursor: pointer;
 }
 
 .chess-square.selected {
-    background-color: rgba(0, 212, 255, 0.3) !important;
-    box-shadow: inset 0 0 20px rgba(0, 212, 255, 0.6);
-    border: 2px solid var(--accent-secondary);
+  background-color: rgba(0, 212, 255, 0.3) !important;
+  box-shadow: inset 0 0 20px rgba(0, 212, 255, 0.6);
+  border: 2px solid var(--accent-secondary);
 }
 
 /* Move highlighting styles */
 .chess-square.valid-move {
-    background-color: rgba(0, 255, 0, 0.3) !important;
-    box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.5);
+  background-color: rgba(0, 255, 0, 0.3) !important;
+  box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.5);
 }
 
 .chess-square.capture-move {
-    background-color: rgba(255, 100, 100, 0.4) !important;
-    box-shadow: inset 0 0 15px rgba(255, 100, 100, 0.6);
+  background-color: rgba(255, 100, 100, 0.4) !important;
+  box-shadow: inset 0 0 15px rgba(255, 100, 100, 0.6);
 }
 
 .chess-square.last-move {
-    background-color: rgba(255, 165, 0, 0.4) !important;
-    box-shadow: inset 0 0 15px rgba(255, 165, 0, 0.6);
-    animation: moveHighlight 0.5s ease-in-out;
+  background-color: rgba(255, 165, 0, 0.4) !important;
+  box-shadow: inset 0 0 15px rgba(255, 165, 0, 0.6);
+  animation: moveHighlight 0.5s ease-in-out;
 }
 
 @keyframes moveHighlight {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 /* ========================================
@@ -1367,7 +1311,6 @@
 .theme-toggle-btn:hover::before {
   left: 100%;
 }
-
 
 /* Keyboard navigation for theme toggle */
 .theme-toggle-btn:focus {
