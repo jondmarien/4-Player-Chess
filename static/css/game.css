@@ -2,6 +2,7 @@
    4-Player Chess - Cybersecurity Theme
    Built with ❤️ by Jon
 ======================================== */
+@import url('chess-merida.css');
 
 :root {
     /* Dark Mode (Default) - your hacker theme */
@@ -71,7 +72,23 @@
     --glow-blue: 0 0 10px var(--player-blue);
     --glow-yellow: 0 0 10px var(--player-yellow);
     --glow-green: 0 0 10px var(--player-green);
-  }
+
+    /* New variables for piece colors */
+    --piece-yellow: #ffd700;
+    --piece-blue: #00bfff;
+    --piece-red: #ff4444;
+    --piece-green: #32cd32;
+    --piece-black: #e0e0e0;
+
+    /* Add to :root */
+    --territory-yellow: #ffd700;
+    --territory-blue: #00bfff;
+    --territory-red: #ff4444;
+    --territory-green: #32cd32;
+
+    /* Add to :root for dark mode */
+    --piece-white: #fff;
+}
   
   /* FIXED Light Mode - Off-White Background & Brighter Blue */
   :root[data-theme="light"] {
@@ -108,6 +125,19 @@
     --card-bg: #ffffff;             /* White card backgrounds */
     --card-border: #e2e8f0;         /* Light card borders */
     --card-text: #1e293b;           /* Dark card text */
+
+    /* New variables for piece colors */
+    --piece-yellow: #ca8a04;
+    --piece-blue: #2563eb;
+    --piece-red: #dc2626;
+    --piece-green: #059669;
+    --piece-black: #374151;
+
+    /* Add to :root[data-theme="light"] */
+    --territory-yellow: #fbbf24;
+    --territory-blue: #3b82f6;
+    --territory-red: #ef4444;
+    --territory-green: #22c55e;
   }
   
   /* ========================================
@@ -361,6 +391,7 @@
   ======================================== */
   
   .chess-piece {
+    font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
     font-size: 2.5rem;
     cursor: grab;
     user-select: none;
@@ -439,30 +470,11 @@
 }
 
 /* Enhanced piece colors for better visibility */
-.piece-yellow { 
-    color: #ffd700; 
-    text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700, 2px 2px 4px rgba(0,0,0,0.8); 
-}
-
-.piece-blue { 
-    color: #00bfff; 
-    text-shadow: 0 0 15px #00bfff, 0 0 25px #00bfff, 2px 2px 4px rgba(0,0,0,0.8); 
-}
-
-.piece-red { 
-    color: #ff4444; 
-    text-shadow: 0 0 15px #ff4444, 0 0 25px #ff4444, 2px 2px 4px rgba(0,0,0,0.8); 
-}
-
-.piece-green { 
-    color: #32cd32; 
-    text-shadow: 0 0 15px #32cd32, 0 0 25px #32cd32, 2px 2px 4px rgba(0,0,0,0.8); 
-}
-
-.piece-black { 
-    color: #e0e0e0; 
-    text-shadow: 0 0 15px #ffffff; 
-}
+.piece-yellow { text-shadow: 0 0 15px var(--piece-yellow), 0 0 25px var(--piece-yellow), 2px 2px 4px rgba(0,0,0,0.8); }
+.piece-blue { text-shadow: 0 0 15px var(--piece-blue), 0 0 25px var(--piece-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+.piece-red { text-shadow: 0 0 15px var(--piece-red), 0 0 25px var(--piece-red), 2px 2px 4px rgba(0,0,0,0.8); }
+.piece-green { text-shadow: 0 0 15px var(--piece-green), 0 0 25px var(--piece-green), 2px 2px 4px rgba(0,0,0,0.8); }
+.piece-black { text-shadow: 0 0 15px var(--piece-black), 0 0 25px var(--piece-black), 2px 2px 4px rgba(0,0,0,0.8); }
   
   /* ========================================
      Player Information Panels
@@ -903,35 +915,15 @@
     transition: all 0.2s ease;
     filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.8));
     z-index: 10;
-    font-family: 'Segoe UI Symbol', 'Noto Color Emoji', serif;
+    font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
 }
 
 /* Enhanced piece colors for better visibility */
-.piece-yellow { 
-    color: #ffd700; 
-    text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700; 
-}
-
-.piece-blue { 
-    color: #00bfff; 
-    text-shadow: 0 0 15px #00bfff, 0 0 25px #00bfff; 
-}
-
-.piece-red { 
-    color: #ff4444; 
-    text-shadow: 0 0 15px #ff4444, 0 0 25px #ff4444; 
-}
-
-.piece-green { 
-    color: #32cd32; 
-    text-shadow: 0 0 15px #32cd32, 0 0 25px #32cd32; 
-}
-
-.piece-black { 
-    color: #e0e0e0; 
-    text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff, 2px 2px 4px rgba(0,0,0,0.8);
-    filter: drop-shadow(0 0 10px #ffffff);
-}
+.piece-yellow { text-shadow: 0 0 15px var(--piece-yellow), 0 0 25px var(--piece-yellow), 2px 2px 4px rgba(0,0,0,0.8); }
+.piece-blue { text-shadow: 0 0 15px var(--piece-blue), 0 0 25px var(--piece-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+.piece-red { text-shadow: 0 0 15px var(--piece-red), 0 0 25px var(--piece-red), 2px 2px 4px rgba(0,0,0,0.8); }
+.piece-green { text-shadow: 0 0 15px var(--piece-green), 0 0 25px var(--piece-green), 2px 2px 4px rgba(0,0,0,0.8); }
+.piece-black { text-shadow: 0 0 15px var(--piece-black), 0 0 25px var(--piece-black), 2px 2px 4px rgba(0,0,0,0.8); }
   
 /* ========================================
    Chaturaji Corner Quadrants
@@ -943,11 +935,27 @@
 }
 
 .chaturaji-board .corner-quadrant.light-square {
-    background: linear-gradient(45deg, #f0d9b5, #ffd700);
+    background: linear-gradient(45deg, var(--board-light), var(--territory-yellow));
 }
 
 .chaturaji-board .corner-quadrant.dark-square {
-    background: linear-gradient(45deg, #b58863, #daa520);
+    background: linear-gradient(45deg, var(--board-dark), var(--territory-yellow));
+}
+
+.chaturaji-board .territory-yellow {
+    border: 1px solid var(--territory-yellow);
+}
+
+.chaturaji-board .territory-blue {
+    border: 1px solid var(--territory-blue);
+}
+
+.chaturaji-board .territory-red {
+    border: 1px solid var(--territory-red);
+}
+
+.chaturaji-board .territory-green {
+    border: 1px solid var(--territory-green);
 }
 
 /* ========================================
@@ -1040,8 +1048,8 @@
 ======================================== */
 
 .chaturaji-board .territory-yellow {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
-    border: 1px solid rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.06));
+    border: 1px solid rgba(251, 191, 36, 0.25);
 }
 
 .chaturaji-board .territory-blue {
@@ -1214,36 +1222,13 @@
    Readable Chaturaji Territory Styling
 ======================================== */
 
-.chaturaji-board .territory-yellow {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    box-shadow: inset 0 0 5px rgba(255, 215, 0, 0.1);
+.chaturaji-board .territory-yellow:not(.territory-blue) {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.06));
+  border: 1px solid rgba(251, 191, 36, 0.25);
 }
-
-.chaturaji-board .territory-blue {
-    background: linear-gradient(135deg, rgba(0, 191, 255, 0.15), rgba(0, 191, 255, 0.05));
-    border: 1px solid rgba(0, 191, 255, 0.3);
-    box-shadow: inset 0 0 5px rgba(0, 191, 255, 0.1);
-}
-
-.chaturaji-board .territory-red {
-    background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05));
-    border: 1px solid rgba(255, 68, 68, 0.3);
-    box-shadow: inset 0 0 5px rgba(255, 68, 68, 0.1);
-}
-
-.chaturaji-board .territory-green {
-    background: linear-gradient(135deg, rgba(50, 205, 50, 0.15), rgba(50, 205, 50, 0.05));
-    border: 1px solid rgba(50, 205, 50, 0.3);
-    box-shadow: inset 0 0 5px rgba(50, 205, 50, 0.1);
-}
-
-/* Remove the directional arrows - they're too busy */
-.chaturaji-board .territory-blue::before,
-.chaturaji-board .territory-yellow::before,
-.chaturaji-board .territory-red::before,
-.chaturaji-board .territory-green::before {
-    display: none;
+.chaturaji-board .territory-blue:not(.territory-yellow) {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.06));
+  border: 1px solid rgba(59, 130, 246, 0.25);
 }
 
 /* Enhanced piece visibility on darker backgrounds */
@@ -1254,7 +1239,7 @@
     transition: all 0.2s ease;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
     z-index: 10;
-    font-family: 'Segoe UI Symbol', 'Noto Color Emoji', serif;
+    font-family: 'Chess Merida Unicode', 'Segoe UI Symbol', 'Noto Color Emoji', serif;
 }
 
 .chess-piece:hover {
@@ -1592,33 +1577,104 @@
   border: 1px solid rgba(34, 197, 94, 0.25);
 }
 
-:root[data-theme="light"] .piece-yellow { 
-  color: #ca8a04; 
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-:root[data-theme="light"] .piece-blue { 
-  color: #2563eb; 
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-:root[data-theme="light"] .piece-red { 
-  color: #dc2626; 
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-:root[data-theme="light"] .piece-green { 
-  color: #059669; 
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-:root[data-theme="light"] .piece-black { 
-  color: #374151; 
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-}
-
 :root[data-theme="light"] .enochian-board .throne-square {
   background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
   border: 2px solid rgba(124, 58, 237, 0.3);
   box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+}
+
+:root[data-theme="light"] .enochian-board .chess-square:not(.throne-square):not(.territory-yellow):not(.territory-blue):not(.territory-red):not(.territory-green) {
+  background: var(--board-light);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+:root[data-theme="light"] .enochian-board .piece-yellow,
+:root[data-theme="light"] .enochian-board .piece-blue,
+:root[data-theme="light"] .enochian-board .piece-red,
+:root[data-theme="light"] .enochian-board .piece-black {
+  color: transparent;
+  -webkit-text-stroke: 0.9px var(--piece-color);
+  text-shadow: 0 0 2px var(--piece-color);
+  fill: transparent;
+  background: none;
+}
+
+/* Enochian outlined pieces for both themes */
+.enochian-board .piece-yellow,
+.enochian-board .piece-blue,
+.enochian-board .piece-red,
+.enochian-board .piece-black {
+  color: transparent;
+  -webkit-text-stroke: 0.9px var(--piece-color);
+  text-shadow: 0 0 2px var(--piece-color);
+  fill: transparent;
+  background: none;
+}
+
+/* Outlined, colored, hollow pieces for all boards */
+.chaturaji-board .chess-piece.piece-yellow,
+.chaturaji-board .chess-piece.piece-blue,
+.chaturaji-board .chess-piece.piece-red,
+.chaturaji-board .chess-piece.piece-green,
+.chaturaji-board .chess-piece.piece-black,
+.enochian-board .chess-piece.piece-yellow,
+.enochian-board .chess-piece.piece-blue,
+.enochian-board .chess-piece.piece-red,
+.enochian-board .chess-piece.piece-green,
+.enochian-board .chess-piece.piece-black {
+  color: transparent;
+  -webkit-text-stroke: 0.9px var(--piece-color);
+  text-shadow: 0 0 2px var(--piece-color);
+  fill: transparent;
+  background: none;
+}
+
+:root[data-theme="dark"] .enochian-board .chess-piece.piece-black,
+:root[data-theme="dark"] .chaturaji-board .chess-piece.piece-black {
+  -webkit-text-stroke: 0.9px var(--piece-white);
+  text-shadow: 0 0 2px var(--piece-white);
+}
+
+.piece-yellow { --piece-color: var(--piece-yellow); }
+.piece-blue   { --piece-color: var(--piece-blue); }
+.piece-red    { --piece-color: var(--piece-red); }
+.piece-green  { --piece-color: var(--piece-green); }
+.piece-black  { --piece-color: var(--piece-black); }
+:root[data-theme="dark"] .piece-black { --piece-color: var(--piece-white); }
+
+/* Only apply yellow territory to correct top-right squares */
+.chaturaji-board .chess-square.territory-yellow:not(.territory-blue) {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.06));
+  border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.chaturaji-board .chess-square.territory-blue:not(.territory-yellow) {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.06));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+/* Remove or comment out generic pseudo-element rules for territory-yellow and territory-blue */
+/* .chaturaji-board .territory-yellow::before { ... } */
+/* .chaturaji-board .territory-blue::before { ... } */
+
+.chaturaji-board .chess-square.territory-yellow:not(.territory-blue)::before {
+  content: "→";
+  color: rgba(251, 191, 36, 0.7);
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  font-size: 1.2rem;
+  pointer-events: none;
+  text-shadow: 0 0 6px rgba(251, 191, 36, 0.5);
+}
+.chaturaji-board .chess-square.territory-blue:not(.territory-yellow)::before {
+  content: "↓";
+  color: rgba(59, 130, 246, 0.7);
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  font-size: 1.2rem;
+  pointer-events: none;
+  text-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
 }

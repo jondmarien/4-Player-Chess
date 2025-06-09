@@ -246,58 +246,51 @@ async def get_game_board(game_id: str):
 def render_chaturaji_board(game_id: str, game_data: dict):
     """Render authentic Chaturaji with CORRECT orientations based on reference"""
     board_html = '<div class="chess-board-grid chaturaji-board">'
-    
+
     # CORRECT Chaturaji setup based on your reference image
     piece_setup = {
         # BLUE corner (top-left) - arranged VERTICALLY down left edge
         'a8': '♚', 'a7': '♞', 'a6': '♝', 'a5': '♜',  # King, Horse, Elephant, Boat down left column
         'b8': '♟', 'b7': '♟', 'b6': '♟', 'b5': '♟',  # Pawns in column next to pieces
-        
         # YELLOW corner (top-right) - arranged HORIZONTALLY across top edge
         'e8': '♚', 'f8': '♞', 'g8': '♝', 'h8': '♜',  # King, Horse, Elephant, Boat across top row
         'e7': '♟', 'f7': '♟', 'g7': '♟', 'h7': '♟',  # Pawns in row below pieces
-        
         # RED corner (bottom-left) - arranged HORIZONTALLY across bottom edge  
         'a1': '♔', 'b1': '♘', 'c1': '♗', 'd1': '♖',  # King, Horse, Elephant, Boat across bottom row
         'a2': '♙', 'b2': '♙', 'c2': '♙', 'd2': '♙',  # Pawns in row above pieces
-        
         # GREEN corner (bottom-right) - arranged VERTICALLY up right edge
         'h1': '♔', 'h2': '♘', 'h3': '♗', 'h4': '♖',  # King, Horse, Elephant, Boat up right column
         'g1': '♙', 'g2': '♙', 'g3': '♙', 'g4': '♙',  # Pawns in column next to pieces
     }
-    
+
+    def get_territory_class(row, col):
+        # Blue: columns 0-1, rows 0-3 (top-left block)
+        if col <= 1 and row <= 3:
+            return " territory-blue"
+        # Yellow: columns 4-7, rows 0-1 (top-right block)
+        if col >= 4 and row <= 1:
+            return " territory-yellow"
+        # Red: columns 0-3, rows 6-7 (bottom-left block)
+        if col <= 3 and row >= 6:
+            return " territory-red"
+        # Green: columns 6-7, rows 4-7 (bottom-right block)
+        if col >= 6 and row >= 4:
+            return " territory-green"
+        return ""
+
     for row in range(8):
         for col in range(8):
             square_name = f"{chr(97+col)}{8-row}"
             square_class = "chess-square"
-            
-            # Define territories based on CORRECT orientations
-            territory_class = ""
-            
-            # Blue territory (top-left) - vertical arrangement, left columns
-            if (col <= 1 and row <= 3):
-                territory_class = " territory-blue"
-            # Yellow territory (top-right) - horizontal arrangement, top rows
-            elif (col >= 4 and row <= 1):
-                territory_class = " territory-yellow"
-            # Red territory (bottom-left) - horizontal arrangement, bottom rows
-            elif (col <= 3 and row >= 6):
-                territory_class = " territory-red"
-            # Green territory (bottom-right) - vertical arrangement, right columns
-            elif (col >= 6 and row >= 4):
-                territory_class = " territory-green"
-            
+            territory_class = get_territory_class(row, col)
             square_class += territory_class
-            
             # Standard alternating colors
             if (row + col) % 2 == 0:
                 square_class += " light-square"
             else:
                 square_class += " dark-square"
-            
             piece = piece_setup.get(square_name, '')
             piece_html = ""
-            
             if piece:
                 # Color assignment based on correct territories
                 if "territory-blue" in square_class:
@@ -310,15 +303,12 @@ def render_chaturaji_board(game_id: str, game_data: dict):
                     piece_class = "piece-green"
                 else:
                     piece_class = "piece-yellow"  # fallback
-                
                 piece_html = f'<div class="chess-piece {piece_class}" draggable="true">{piece}</div>'
-            
             board_html += f'''
             <div class="{square_class}" data-square="{square_name}" data-row="{row}" data-col="{col}">
                 {piece_html}
             </div>
             '''
-    
     board_html += '</div>'
     return HTMLResponse(board_html)
 
