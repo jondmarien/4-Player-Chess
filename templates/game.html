@@ -102,25 +102,26 @@
     <div class="game-footer">
         <div class="move-history">
             <h4>Move History</h4>
-            <div id="moves-list" hx-ws="trigger:game-update" hx-swap="innerHTML">
-                <div class="move-item">
-                    <span class="move-player" style="color: var(--player-red);">Red</span>
-                    <span class="move-notation">e2-e4</span>
-                    <span style="color: var(--cyber-light-gray);">00:01</span>
-                </div>
+            <div id="moves-list">
+                <!-- Move history will be populated here -->
             </div>
         </div>
         
         <div class="button-group">
-            <button class="cyber-button" onclick="location.href='/lobby'">
-                ← Leave Game
+            <button class="cyber-button" id="leave-game-btn">
+                🚪 Leave Game
             </button>
-            <button class="cyber-button" id="resign-btn">
+            <button class="cyber-button" id="resign-btn" style="display: none;">
                 🏳️ Resign
             </button>
-            <button class="cyber-button" id="offer-draw">
+            <button class="cyber-button" id="offer-draw" style="display: none;">
                 🤝 Offer Draw
             </button>
+            
+            <!-- Host indicator -->
+            <div id="host-indicator" style="display: none;" class="host-badge">
+                👑 Host
+            </div>
         </div>
     </div>
 </div>

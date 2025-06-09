@@ -7,6 +7,8 @@ class GameWebSocket {
         this.maxReconnectAttempts = 5;
         this.isConnecting = false;
         this.isDestroyed = false;
+        this.isHost = false;
+        this.voluntaryLeave = false;
         
         this.setupPageVisibilityHandlers();
         this.setupBeforeUnloadHandler();
@@ -100,10 +102,22 @@ class GameWebSocket {
     }
     
     disconnect() {
-        console.log('🔌 Manually disconnecting WebSocket...');
+        console.log('🔌 Disconnecting WebSocket...');
         this.isDestroyed = true;
         
         if (this.socket) {
+            if (!this.voluntaryLeave) {
+                // Send leave message if not already sent
+                try {
+                    this.socket.send(JSON.stringify({
+                        type: 'leave_game',
+                        player_id: this.playerId
+                    }));
+                } catch (e) {
+                    console.log('Could not send leave message:', e);
+                }
+            }
+            
             this.socket.close(1000, 'User disconnected');
             this.socket = null;
         }
@@ -122,13 +136,31 @@ class GameWebSocket {
         
         switch (message.type) {
             case 'connection_established':
-                this.showToast(`Connected as ${message.player_id}`, 'success');
+                this.isHost = message.is_host || false;
+                this.showToast(`Connected as ${message.player_id}${this.isHost ? ' (Host)' : ''}`, 'success');
+                break;
+                
+            case 'host_migration':
+                if (message.new_host === this.playerId) {
+                    this.isHost = true;
+                    this.showToast('You are now the host!', 'info');
+                } else {
+                    this.showToast(`${message.new_host} is now the host`, 'info');
+                }
+                this.updateHostIndicator();
+                break;
+                
+            case 'player_left':
+                this.showToast(`${message.player_id} left the game`, 'warning');
+                this.updatePlayerCount();
                 break;
                 
             case 'game_state':
                 if (window.chessBoard) {
                     window.chessBoard.updateBoard(message.data);
                 }
+                this.isHost = message.is_host || false;
+                this.updateHostIndicator();
                 break;
                 
             case 'move_made':
@@ -151,7 +183,10 @@ class GameWebSocket {
                 break;
                 
             default:
-                console.log('Unknown message type:', message.type);
+                // Call original handler for other types
+                if (typeof this._originalHandleMessage === 'function') {
+                    this._originalHandleMessage(message);
+                }
         }
     }
     
@@ -242,6 +277,41 @@ class GameWebSocket {
             this.showToast('Connection lost. Please refresh the page.', 'error');
         }
     }
+    
+    updateHostIndicator() {
+        // Update UI to show if current player is host
+        const hostIndicator = document.getElementById('host-indicator');
+        if (hostIndicator) {
+            hostIndicator.style.display = this.isHost ? 'block' : 'none';
+        }
+    }
+    
+    updatePlayerCount() {
+        // Refresh lobby display
+        const activeGamesElement = document.getElementById('games-list');
+        if (activeGamesElement) {
+            // Trigger HTMX refresh
+            htmx.trigger(activeGamesElement, 'refresh');
+        }
+    }
+    
+    // Add method to voluntarily leave game
+    leaveGame() {
+        console.log('🚪 Voluntarily leaving game...');
+        this.voluntaryLeave = true;
+        
+        if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+            this.socket.send(JSON.stringify({
+                type: 'leave_game',
+                player_id: this.playerId
+            }));
+        }
+        
+        // Close connection after a brief delay
+        setTimeout(() => {
+            this.disconnect();
+        }, 500);
+    }
 }
 
 // Ensure cleanup on page unload
@@ -255,11 +325,53 @@ document.addEventListener('DOMContentLoaded', function() {
         gameWebSocketInstance = new GameWebSocket(gameId, 'player1');
         window.gameWebSocket = gameWebSocketInstance;
     }
-});
-
-// Enhanced cleanup
-window.addEventListener('beforeunload', function() {
-    if (gameWebSocketInstance) {
-        gameWebSocketInstance.disconnect();
+    
+    // Add leave game button to game pages
+    const leaveButton = document.getElementById('leave-game-btn');
+    if (leaveButton && window.gameWebSocket) {
+        leaveButton.addEventListener('click', function() {
+            if (confirm('Are you sure you want to leave this game?')) {
+                window.gameWebSocket.leaveGame();
+                // Redirect to lobby after leaving
+                setTimeout(() => {
+                    window.location.href = '/lobby';
+                }, 1000);
+            }
+        });
     }
+    
+    // Add resign button functionality
+    const resignButton = document.getElementById('resign-btn');
+    if (resignButton && window.gameWebSocket) {
+        resignButton.style.display = '';
+        resignButton.addEventListener('click', function() {
+            if (confirm('Are you sure you want to resign?')) {
+                window.gameWebSocket.send(JSON.stringify({
+                    type: 'resign',
+                    player_id: window.gameWebSocket.playerId
+                }));
+                window.gameWebSocket.showToast('You have resigned.', 'warning');
+            }
+        });
+    }
+
+    // Add offer draw button functionality
+    const offerDrawButton = document.getElementById('offer-draw');
+    if (offerDrawButton && window.gameWebSocket) {
+        offerDrawButton.style.display = '';
+        offerDrawButton.addEventListener('click', function() {
+            window.gameWebSocket.send(JSON.stringify({
+                type: 'offer_draw',
+                player_id: window.gameWebSocket.playerId
+            }));
+            window.gameWebSocket.showToast('Draw offer sent.', 'info');
+        });
+    }
+    
+    // Handle browser close/refresh
+    window.addEventListener('beforeunload', function(e) {
+        if (window.gameWebSocket && !window.gameWebSocket.voluntaryLeave) {
+            window.gameWebSocket.disconnect();
+        }
+    });
 });

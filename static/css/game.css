@@ -71,6 +71,43 @@
 }
 
 :root[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e5e7eb;
+  --bg-tertiary: #dbeafe;
+  --bg-quaternary: #c7d2fe;
+  --text-primary: #2563eb;
+  --text-secondary: #1e293b;
+  --text-tertiary: #64748b;
+  --accent-primary: #2563eb;
+  --accent-secondary: #38bdf8;
+  --accent-danger: #ef4444;
+  --accent-warning: #fbbf24;
+  --accent-purple: #7c3aed;
+  --border-primary: #2563eb;
+  --border-secondary: #dbeafe;
+  --border-subtle: #cbd5e1;
+  --shadow-glow: 0 0 10px var(--accent-primary), 0 0 20px var(--accent-primary);
+  --input-bg: #fff;
+  --input-border: #cbd5e1;
+  --input-text: #1e293b;
+  --input-placeholder: #64748b;
+  --card-bg: #fff;
+  --card-border: #cbd5e1;
+  --card-text: #1e293b;
+  --cyber-black: #1e293b;
+  --cyber-dark: #64748b;
+  --cyber-gray: #cbd5e1;
+  --cyber-light-gray: #e5e7eb;
+  --cyber-green: #22c55e;
+  --cyber-blue: #2563eb;
+  --cyber-red: #ef4444;
+  --cyber-yellow: #fbbf24;
+  --cyber-purple: #7c3aed;
+  --cyber-orange: #f59e42;
+  --player-red: #ef4444;
+  --player-blue: #2563eb;
+  --player-yellow: #fbbf24;
+  --player-green: #22c55e;
   --board-light: #f0d9b5;
   --board-dark: #b58863;
   --piece-yellow: #ca8a04;
@@ -1382,6 +1419,7 @@ body {
   color: var(--text-primary);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
+  padding: 25px;
 }
 
 :root[data-theme="light"] .cyber-card:hover {
@@ -1393,23 +1431,30 @@ body {
 :root[data-theme="light"] .cyber-card h3 {
   color: var(--text-primary);
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
-:root[data-theme="light"] .cyber-card p {
-  color: var(--text-secondary);
-  font-weight: 400;
-  line-height: 1.6;
+:root[data-theme="light"] .cyber-card p,
+:root[data-theme="light"] .cyber-card ul,
+:root[data-theme="light"] .cyber-card li,
+:root[data-theme="light"] .cyber-card span,
+:root[data-theme="light"] .variant-option p,
+:root[data-theme="light"] .variant-option ul,
+:root[data-theme="light"] .terminal-text span {
+  color: #334155 !important;
+  opacity: 1 !important;
 }
 
 /* Buttons - high contrast in light mode */
 :root[data-theme="light"] .cyber-button {
   background: #ffffff;
   color: var(--accent-primary);
-  border: 2px solid var(--accent-primary);
+  border: 1px solid var(--accent-primary);
   font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 12px 24px;
+  transition: all 0.3s ease;
 }
 
 :root[data-theme="light"] .cyber-button:hover {
@@ -1422,7 +1467,7 @@ body {
 :root[data-theme="light"] .cyber-button.primary {
   background: var(--accent-primary);
   color: #ffffff;
-  border-color: var(--accent-secondary);
+  border: 1px solid var(--accent-secondary);
 }
 
 :root[data-theme="light"] .cyber-button.primary:hover {
@@ -1434,8 +1479,9 @@ body {
 :root[data-theme="light"] .status-bar {
   background: var(--bg-secondary);
   color: var(--text-primary);
-  border: 2px solid var(--border-subtle);
-  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 15px;
 }
 
 /* Game variants text - dark in light mode */
@@ -1620,4 +1666,47 @@ body {
   font-size: 1.2rem;
   pointer-events: none;
   text-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+}
+
+.cyber-card p,
+.cyber-card ul,
+.cyber-card li,
+.cyber-card span,
+.variant-option p,
+.variant-option ul,
+.terminal-text span {
+  color: var(--text-secondary) !important;
+  opacity: 1 !important;
+}
+
+:root[data-theme="light"] .cyber-card p,
+:root[data-theme="light"] .cyber-card ul,
+:root[data-theme="light"] .cyber-card li,
+:root[data-theme="light"] .cyber-card span,
+:root[data-theme="light"] .variant-option p,
+:root[data-theme="light"] .variant-option ul,
+:root[data-theme="light"] .terminal-text span {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+
+#games-list .terminal-text > div:first-child {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  opacity: 1 !important;
+  text-shadow: none !important;
+  font-size: 1.25rem;
+}
+#games-list .terminal-text > div:last-child {
+  color: var(--text-secondary) !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+  font-size: 1.1rem;
+}
+
+:root[data-theme="light"] #games-list .terminal-text > div:first-child {
+  color: #2563eb !important;
+}
+:root[data-theme="light"] #games-list .terminal-text > div:last-child {
+  color: #334155 !important;
 }

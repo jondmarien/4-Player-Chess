@@ -62,9 +62,30 @@ input, select, textarea, button {
   margin-bottom: 1rem;
 }
 
-.cyber-card p {
+.cyber-card p, .cyber-card li, .cyber-card small {
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.cyber-card .card-muted {
   color: var(--text-secondary);
-  line-height: 1.6;
+  opacity: 0.85;
+}
+
+:root[data-theme="light"] .cyber-card p,
+:root[data-theme="light"] .cyber-card li,
+:root[data-theme="light"] .cyber-card small {
+  color: var(--text-primary);
+}
+
+:root[data-theme="light"] .cyber-card .card-muted {
+  color: #64748b;
+  opacity: 0.95;
+}
+
+:root[data-theme="dark"] .cyber-card .card-muted {
+  color: #a0a0a0;
+  opacity: 0.95;
 }
 
 .cyber-card strong {
